@@ -15,7 +15,10 @@ export default function ThemeSwitch() {
 
   return (
     <div>
-      <button className="" onClick={() => handleToggle()}>
+      <button
+        className="h-[50px] w-full flex justify-center items-center text-center"
+        onClick={() => handleToggle()}
+      >
         {theme === "light" ? "dark" : "light"} mode
       </button>
     </div>

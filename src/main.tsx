@@ -6,6 +6,7 @@ import "./index.css";
 import Houses from "./components/houses.tsx";
 import House from "./components/house.tsx";
 import Signup from "./components/signup.tsx";
+import AddHouse from "./components/addHouse.tsx";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/houses",
         element: <Houses />,
+      },
+      {
+        path: "/addHouse",
+        element: <AddHouse />,
       },
       {
         path: "/houses/:id",
