@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import "./index.css";
 import Houses from "./components/houses.tsx";
 import House from "./components/house.tsx";
-import Signup from "./components/signup/signup.tsx";
+import Signup from "./components/signup.tsx";
 
 const router = createBrowserRouter([
   {
