@@ -10,7 +10,7 @@ export default function Input({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
-    <div className="w-full flex flex-row justify-between items-center px-[50px]">
+    <div className="w-full flex flex-row justify-between items-center ">
       <label htmlFor={label}>{label}: </label>
       <input
         onChange={(e) => handleChange(e)}

@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Button from "./button";
 import Input from "./input";
 
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 interface house {
   address: string;
   description: string;
   phone: string;
+  position: { lat: number; lng: number };
 }
 
 export default function AddHouse() {
@@ -15,7 +16,24 @@ export default function AddHouse() {
     address: "",
     description: "",
     phone: "",
+    position: { lat: 51.505, lng: -0.09 },
   });
+
+  const markerRef = useRef(null);
+  const eventHandlers = useMemo(
+    () => ({
+      dragend() {
+        const marker = markerRef.current;
+        if (marker != null) {
+          setFormData((formData) => ({
+            ...formData,
+            position: marker.getLatLng(),
+          }));
+        }
+      },
+    }),
+    []
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,50 +52,57 @@ export default function AddHouse() {
   }
 
   return (
-    <div className="overflow-auto w-3/4 flex flex-col gap-[20px] p-[50px]">
-      <h1 className="font-bold text-xl w-full text-center">Add House</h1>
-      <form
-        className="flex flex-col gap-[30px] items-center  p-[50px]"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <Input
-          type="text"
-          label="phone"
-          value={formData.phone}
-          handleChange={handleChange}
-        />
-        <Input
-          type="text"
-          label="address"
-          value={formData.address}
-          handleChange={handleChange}
-        />
-        <Input
-          type="text"
-          label="description"
-          value={formData.description}
-          handleChange={handleChange}
-        />
-
-        <MapContainer
-          style={{ height: "300px", width: "500px" }}
-          center={[51.505, -0.09]}
-          zoom={13}
-          scrollWheelZoom={false}
+    <div className="overflow-auto w-3/4 flex flex-row justify-center  p-[50px]">
+      <div className="w-[800px] flex flex-col gap-[20px]">
+        <h1 className="font-bold text-xl w-full text-center">Add House</h1>
+        <form
+          className="flex flex-col gap-[30px] items-center  p-[50px]"
+          onSubmit={(e) => handleSubmit(e)}
         >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          <Input
+            type="text"
+            label="phone"
+            value={formData.phone}
+            handleChange={handleChange}
           />
-          <Marker position={[51.505, -0.09]}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        </MapContainer>
+          <Input
+            type="text"
+            label="address"
+            value={formData.address}
+            handleChange={handleChange}
+          />
+          <Input
+            type="text"
+            label="description"
+            value={formData.description}
+            handleChange={handleChange}
+          />
 
-        <Button text="Add" />
-      </form>
+          <MapContainer
+            style={{ height: "300px", width: "700px", borderRadius: "5px" }}
+            center={[51.505, -0.09]}
+            zoom={13}
+            scrollWheelZoom={false}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker
+              draggable={true}
+              eventHandlers={eventHandlers}
+              position={formData.position}
+              ref={markerRef}
+            >
+              <Popup>
+                <span>drag the marker</span>
+              </Popup>
+            </Marker>
+          </MapContainer>
+
+          <Button text="Add" />
+        </form>
+      </div>
     </div>
   );
 }

@@ -13,26 +13,24 @@
   ],
   "houses": [
     {
-      "id": 1,
-      "address": "test name",
-      "description": "some address"
+      "address": "london sfs ",
+      "description": "fdsafsafsdfsdfsdaf",
+      "phone": "634654634",
+      "position": {
+        "lat": 51.505,
+        "lng": -0.09
+      },
+      "id": 5
     },
     {
-      "id": 2,
-      "address": "test name 2",
-      "description": "some address 2"
-    },
-    {
-      "address": "fdafasfed",
-      "description": "fsd dasf ds d fasdfsf se fwe fa ",
-      "phone": "4213421",
-      "id": 3
-    },
-    {
-      "address": "fsdf as fadsf sda fsa fds fsf",
-      "description": " sdfsa fdsf saf fdsaf daf asda",
-      "phone": "43214234324",
-      "id": 4
+      "address": "tehran ",
+      "description": "dsafa fasfasdf dsaf asf a saf ",
+      "phone": "42141234",
+      "position": {
+        "lat": 35.24561909420681,
+        "lng": 51.67968750000001
+      },
+      "id": 6
     }
   ]
 }
