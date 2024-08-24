@@ -1,5 +1,6 @@
 import useFetch from "../api/useFetch";
-import { Link } from "react-router-dom";
+
+import HouseCard from "./houseCard";
 
 interface house {
   id: number;
@@ -24,13 +25,19 @@ export default function Houses() {
     return <div>is loading...</div>;
   }
 
+  if (houses && houses.length === 0) {
+    return (
+      <div className="w-3/4 flex items-center justify-center">
+        No House added!
+      </div>
+    );
+  }
+
   if (houses) {
     return (
-      <div>
+      <div className="w-3/4 flex flex-col gap-[20px] p-[20px]">
         {houses.map((house: house) => (
-          <Link key={house.id} to={`/houses/${house.id}`}>
-            <div>{house.address}</div>
-          </Link>
+          <HouseCard key={house.id} address={house.address} id={house.id} />
         ))}
       </div>
     );

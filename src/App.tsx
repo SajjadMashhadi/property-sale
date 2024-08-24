@@ -3,11 +3,10 @@ import Sidebar from "./components/sidebar";
 
 function App() {
   return (
-    <div className="w-full h-[100vh] dark:bg-gray-800 dark:text-gray-400 flex flex-row justify-start">
+    <div className="w-full h-[100vh] dark:bg-gray-800 dark:text-gray-400 flex flex-row justify-start gap-[20px]">
       <Sidebar />
-      <div>
-        <Outlet />
-      </div>
+
+      <Outlet />
     </div>
   );
 }
