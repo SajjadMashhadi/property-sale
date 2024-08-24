@@ -1,17 +1,11 @@
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import ThemeSwitch from "./components/themeSwitch";
 
 function App() {
-  const [dark, setDark] = useState(false);
-
-  const handleClick = () => {
-    setDark(!dark);
-    document.body.classList.toggle("dark");
-  };
   return (
-    <div>
-      <div className="text-blue-500 dark:text-red-500">home</div>
-      <button onClick={() => handleClick()}>toggle</button>
+    <div className="w-full h-[100vh] dark:bg-black dark:text-gray-400">
+      <div className="">home</div>
+      <ThemeSwitch />
       <div>
         <Outlet />
       </div>
