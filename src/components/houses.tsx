@@ -35,7 +35,7 @@ export default function Houses() {
 
   if (houses) {
     return (
-      <div className="w-3/4 flex flex-col gap-[20px] p-[20px]">
+      <div className="w-3/4 flex flex-col gap-[20px] p-[50px]">
         {houses.map((house: house) => (
           <HouseCard key={house.id} address={house.address} id={house.id} />
         ))}

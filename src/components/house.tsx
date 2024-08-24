@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../api/useFetch";
+import DetailFiels from "./detailField";
 
 export default function House() {
   const { id } = useParams();
@@ -19,10 +20,9 @@ export default function House() {
 
   if (house) {
     return (
-      <div>
-        <div>{house.id}</div>
-        <div>{house.address}</div>
-        <div>{house.description}</div>
+      <div className="w-3/4 p-[50px]">
+        <DetailFiels title="Address" content={house.address} />
+        <DetailFiels title="Description" content={house.description} />
       </div>
     );
   }
