@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "email": "asdf@fdsf.com",
+      "password": "$2a$10$mWNihzaPuwm1LPAvD6nxnuzZNCKGVMJWR9tDpSo2FtTSN3d7.1j2a",
+      "id": 1
+    },
+    {
+      "email": "qwer@gmail.com",
+      "password": "$2a$10$Cdvzt5QxDQmOyrQEzncP/u40tHGM.3qObbhuHPpu4bMeF2Ep2Whjm",
+      "id": 2
+    }
+  ],
+  "houses": [
+    {
+      "id": 1,
+      "address": "test name",
+      "description": "some address"
+    },
+    {
+      "id": 2,
+      "address": "test name 2",
+      "description": "some address 2"
+    }
+  ]
+}
