@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./button";
 
 interface user {
   email: string;
@@ -37,8 +38,8 @@ export default function Signup({ registerType }: { registerType: string }) {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center justify-items-center items-center">
-      <div className="w-[700px] flex flex-col gap-[50px] bg-gray-50 p-[40px] border-none rounded-[5px]">
+    <div className="w-full h-screen flex flex-col justify-center justify-items-center items-center dark:bg-gray-700">
+      <div className=" 0 w-[700px] flex flex-col gap-[50px] bg-gray-50 p-[40px] border-none rounded-[5px]">
         <h1 className="text-4xl  font-bold text-center">{registerType}</h1>
         <form
           className="flex flex-col gap-[30px]"
@@ -67,13 +68,7 @@ export default function Signup({ registerType }: { registerType: string }) {
             ></input>
           </div>
           <div className="flex flex-row justify-center">
-            <button
-              disabled={!formData.email || !formData.password}
-              className="w-[100px] h-[50px] text-center rounded-[5px] border-solid border-black border-[2px] hover:bg-black hover:text-white disabled:hover:text-gray-500 disabled:hover:bg-inherit"
-              type="submit"
-            >
-              {registerType}
-            </button>
+            <Button text={registerType} />
           </div>
         </form>
       </div>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 export default function ThemeSwitch() {
-  const [theme, setTheme] = useLocalStorage("theme", "light");
+  const [theme, setTheme] = useLocalStorage("theme", "dark");
 
   useEffect(() => {
     document.body.classList.remove("light", "dark");
@@ -14,13 +14,11 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <div>
-      <button
-        className="h-[50px] w-full flex justify-center items-center text-center"
-        onClick={() => handleToggle()}
-      >
-        {theme === "light" ? "dark" : "light"} mode
-      </button>
-    </div>
+    <button
+      className="h-[50px] rounded-[5px] flex justify-center items-center dark:hover:bg-gray-600 hover:bg-gray-200"
+      onClick={() => handleToggle()}
+    >
+      {theme === "light" ? "dark" : "light"} mode
+    </button>
   );
 }
