@@ -1,17 +1,20 @@
 import { useState } from "react";
 import Button from "./button";
+import Input from "./input";
+
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 
 interface house {
   address: string;
   description: string;
-  phone: number | undefined;
+  phone: string;
 }
 
 export default function AddHouse() {
   const [formData, setFormData] = useState<house>({
     address: "",
     description: "",
-    phone: undefined,
+    phone: "",
   });
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -31,45 +34,48 @@ export default function AddHouse() {
   }
 
   return (
-    <div className="w-3/4 flex flex-col gap-[20px] p-[50px]">
+    <div className="overflow-auto w-3/4 flex flex-col gap-[20px] p-[50px]">
       <h1 className="font-bold text-xl w-full text-center">Add House</h1>
       <form
-        className="flex flex-col gap-[30px]"
+        className="flex flex-col gap-[30px] items-center  p-[50px]"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div>
-          <label htmlFor="address">Address: </label>
-          <input
-            onChange={(e) => handleChange(e)}
-            value={formData.address}
-            className="w-[300px] h-[30px] p-[10px] bg-inherit border-b-gray-200 focus:border-none focus-within:border-none"
-            type="text"
-            name="address"
-            placeholder="address"
+        <Input
+          type="text"
+          label="phone"
+          value={formData.phone}
+          handleChange={handleChange}
+        />
+        <Input
+          type="text"
+          label="address"
+          value={formData.address}
+          handleChange={handleChange}
+        />
+        <Input
+          type="text"
+          label="description"
+          value={formData.description}
+          handleChange={handleChange}
+        />
+
+        <MapContainer
+          style={{ height: "300px", width: "500px" }}
+          center={[51.505, -0.09]}
+          zoom={13}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        </div>
-        <div>
-          <label htmlFor="description">Description: </label>
-          <input
-            value={formData.description}
-            onChange={(e) => handleChange(e)}
-            className="w-[300px] h-[30px] p-[10px] bg-inherit border-b-gray-200 focus:border-none focus-within:border-none"
-            type="text"
-            name="description"
-            placeholder="description"
-          />
-        </div>
-        <div>
-          <label htmlFor="phone">Phone: </label>
-          <input
-            value={formData.phone}
-            onChange={(e) => handleChange(e)}
-            className="w-[300px] h-[30px] p-[10px] bg-inherit border-b-gray-200 focus:border-none focus-within:border-none"
-            type="text"
-            name="phone"
-            placeholder="phone"
-          />
-        </div>
+          <Marker position={[51.505, -0.09]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer>
+
         <Button text="Add" />
       </form>
     </div>

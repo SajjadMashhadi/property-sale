@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import Button from "./button";
 
 export default function ThemeSwitch() {
   const [theme, setTheme] = useLocalStorage("theme", "dark");
@@ -14,11 +15,9 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <button
-      className="h-[50px] rounded-[5px] flex justify-center items-center dark:hover:bg-gray-600 hover:bg-gray-200"
-      onClick={() => handleToggle()}
-    >
-      {theme === "light" ? "dark" : "light"} mode
-    </button>
+    <Button
+      text={`${theme === "light" ? "dark" : "light"} mode`}
+      onClick={handleToggle}
+    />
   );
 }

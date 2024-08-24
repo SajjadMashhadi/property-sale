@@ -21,6 +21,7 @@ export default function House() {
   if (house) {
     return (
       <div className="w-3/4 p-[50px]">
+        <h1 className="font-bold text-xl w-full pl-[20px]">House Details</h1>
         <DetailFiels title="Address" content={house.address} />
         <DetailFiels title="Description" content={house.description} />
       </div>
