@@ -1,24 +1,39 @@
 import { useMemo, useRef, useState } from "react";
 import Button from "./button";
 import Input from "./input";
+import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { addHouse } from "../api/useFetch";
+import { addHouse, editHouse } from "../api/useFetch";
 
 interface house {
   address: string;
   description: string;
   phone: string;
   position: { lat: number; lng: number };
+  id?: number;
 }
 
-export default function AddHouse() {
-  const [formData, setFormData] = useState<house>({
-    address: "",
-    description: "",
-    phone: "",
-    position: { lat: 51.505, lng: -0.09 },
-  });
+export default function AddHouse({
+  house,
+  handleClose,
+}: {
+  house?: house;
+  handleClose?: () => void;
+}) {
+  const navigateTo = useNavigate();
+
+  const [formData, setFormData] = useState<house>(
+    house
+      ? house
+      : {
+          address: "",
+          description: "",
+          phone: "",
+          position: { lat: 51.505, lng: -0.09 },
+        }
+  );
 
   const markerRef = useRef(null);
   const eventHandlers = useMemo(
@@ -38,7 +53,15 @@ export default function AddHouse() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    addHouse(formData);
+    if (house) {
+      editHouse(house.id, formData)
+        .then(() => handleClose())
+        .catch((err) => console.log(err));
+    } else {
+      addHouse(formData)
+        .then(() => navigateTo("/"))
+        .catch((err) => console.log(err));
+    }
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -46,9 +69,16 @@ export default function AddHouse() {
   }
 
   return (
-    <div className="overflow-auto w-3/4 flex flex-row justify-center  p-[50px]">
+    <div
+      className={clsx(
+        "overflow-auto w-3/4 flex flex-row justify-center p-[50px]",
+        { "w-full h-fit p-0 dark:bg-gray-800 dark:text-gray-400": house }
+      )}
+    >
       <div className="w-[800px] flex flex-col gap-[20px]">
-        <h1 className="font-bold text-xl w-full text-center">Add House</h1>
+        {!house && (
+          <h1 className="font-bold text-xl w-full text-center">Add House</h1>
+        )}
         <form
           className="flex flex-col gap-[30px] items-center  p-[50px]"
           onSubmit={(e) => handleSubmit(e)}
@@ -93,8 +123,14 @@ export default function AddHouse() {
               </Popup>
             </Marker>
           </MapContainer>
-
-          <Button text="Add" />
+          {house ? (
+            <div className="flex flex-row justify-start gap-[20px]">
+              <Button text="close" onClick={() => handleClose()} />
+              <Button text="edit" />
+            </div>
+          ) : (
+            <Button text="add" />
+          )}
         </form>
       </div>
     </div>

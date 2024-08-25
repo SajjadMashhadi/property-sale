@@ -7,6 +7,7 @@ import Button from "./button";
 import Modal from "react-modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AddHouse from "./addHouse";
 
 const customStyles = {
   content: {
@@ -23,6 +24,8 @@ const customStyles = {
 
 export default function House() {
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [editModal, setEditModal] = useState<boolean>(false);
+
   const { id } = useParams();
   const navigateTo = useNavigate();
 
@@ -69,10 +72,11 @@ export default function House() {
             <Marker draggable={false} position={house.position}></Marker>
           </MapContainer>
           <div className="flex flex-row justify-start gap-[20px]">
-            <Button text="edit" />
+            <Button text="edit" onClick={() => setEditModal(true)} />
             <Button onClick={() => setDeleteModal(true)} text="remove" />
           </div>
           <Modal
+            ariaHideApp={false}
             isOpen={deleteModal}
             onAfterOpen={() => setDeleteModal(true)}
             onRequestClose={() => setDeleteModal(false)}
@@ -85,6 +89,15 @@ export default function House() {
                 <Button text="yes" onClick={() => handleDelete()} />
               </div>
             </div>
+          </Modal>
+          <Modal
+            ariaHideApp={false}
+            isOpen={editModal}
+            onAfterOpen={() => setEditModal(true)}
+            onRequestClose={() => setEditModal(false)}
+            style={customStyles}
+          >
+            <AddHouse handleClose={() => setEditModal(false)} house={house} />
           </Modal>
         </div>
       </div>

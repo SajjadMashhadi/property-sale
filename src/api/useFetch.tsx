@@ -75,13 +75,31 @@ export const useHouse = (id: string): UseFetchResult => {
 };
 
 //add house
-export const addHouse = (body): void => {
-  api
-    .post("/houses", body)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => console.log(err));
+export const addHouse = (body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .post("/houses", body)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+//add house
+export const editHouse = (id, body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .put(`/houses/${id}`, body)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 };
 
 //delete house
