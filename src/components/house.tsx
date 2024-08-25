@@ -1,44 +1,92 @@
 import { useParams } from "react-router-dom";
-import useFetch, { useHouse } from "../api/useFetch";
+import { deleteHouse, useHouse } from "../api/useFetch";
 import DetailFiels from "./detailField";
+import EmptyPage from "./emptyPage";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import Button from "./button";
+import Modal from "react-modal";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    padding: "0",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    borderRadious: "5px",
+  },
+};
 
 export default function House() {
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const { id } = useParams();
-  // const {
-  //   data: house,
-  //   error,
-  //   isPending,
-  // } = useFetch("http://localhost:3000/houses/" + id);
+  const navigateTo = useNavigate();
 
   const { data: house, error, isPending } = useHouse(id);
 
+  const handleDelete = () => {
+    if (id) {
+      deleteHouse(id)
+        .then(() => navigateTo("/"))
+        .catch((err) => console.log(err));
+    }
+  };
+
   if (error) {
-    return <div>error</div>;
+    return <EmptyPage text="Error! Please try again later." />;
   }
 
   if (isPending) {
-    return <div>is loading...</div>;
+    return <EmptyPage text="Loading..." />;
   }
 
   if (house) {
     return (
       <div className="w-3/4 p-[50px]">
-        <h1 className="font-bold text-xl w-full pl-[20px]">House Details</h1>
-        <DetailFiels title="Address" content={house.address} />
-        <DetailFiels title="Description" content={house.description} />
-        <MapContainer
-          style={{ height: "300px", width: "700px", borderRadius: "5px" }}
-          center={[house.position.lat, house.position.lng]}
-          zoom={13}
-          scrollWheelZoom={false}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker draggable={false} position={house.position}></Marker>
-        </MapContainer>
+        <div className="w-[800px] flex flex-col gap-[20px]">
+          <h1 className="font-bold text-xl w-full ">House Details</h1>
+          <DetailFiels title="Address" content={house.address} />
+          <DetailFiels title="Description" content={house.description} />
+          <MapContainer
+            style={{
+              height: "300px",
+              width: "700px",
+              borderRadius: "5px",
+              zIndex: "0",
+            }}
+            center={[house.position.lat, house.position.lng]}
+            zoom={13}
+            scrollWheelZoom={false}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker draggable={false} position={house.position}></Marker>
+          </MapContainer>
+          <div className="flex flex-row justify-start gap-[20px]">
+            <Button text="edit" />
+            <Button onClick={() => setDeleteModal(true)} text="remove" />
+          </div>
+          <Modal
+            isOpen={deleteModal}
+            onAfterOpen={() => setDeleteModal(true)}
+            onRequestClose={() => setDeleteModal(false)}
+            style={customStyles}
+          >
+            <div className="dark:bg-gray-800 dark:text-gray-400 w-[400px] p-[20px]  flex flex-col gap-[20px] items-center">
+              <p>Do you want to remove this item?</p>
+              <div className="flex flex-row justify-start gap-[20px]">
+                <Button text="no" onClick={() => setDeleteModal(false)} />
+                <Button text="yes" onClick={() => handleDelete()} />
+              </div>
+            </div>
+          </Modal>
+        </div>
       </div>
     );
   }

@@ -21,7 +21,6 @@ export default function Signup({ registerType }: { registerType: string }) {
     if (registerType === "login") {
       login(formData)
         .then((res) => {
-          console.log(res);
           navigateTo("/");
         })
         .catch((err) => console.log(err));
@@ -51,7 +50,7 @@ export default function Signup({ registerType }: { registerType: string }) {
           <div className="flex flex-row justify-between items-center">
             <label htmlFor="email">Email:</label>
             <input
-              className="w-[300px] h-[40px] p-[10px]"
+              className="w-[300px] h-[30px] placeholder:text-gray-400 dark:placeholder:text-gray-600 bg-inherit border-b-[#a3a3a341] focus:border-b-gray-400 border-b border-solid focus:outline-none "
               type="text"
               placeholder="Email"
               value={formData.email}
@@ -62,7 +61,7 @@ export default function Signup({ registerType }: { registerType: string }) {
           <div className="flex flex-row justify-between items-center">
             <label htmlFor="password">Password:</label>
             <input
-              className="w-[300px] h-[40px] p-[10px]"
+              className="w-[300px] h-[30px] placeholder:text-gray-400 dark:placeholder:text-gray-600 bg-inherit border-b-[#a3a3a341] focus:border-b-gray-400 border-b border-solid focus:outline-none "
               type="text"
               placeholder="Password"
               value={formData.password}

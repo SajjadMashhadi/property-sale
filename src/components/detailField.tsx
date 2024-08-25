@@ -6,7 +6,7 @@ export default function DetailFiels({
   content: string | number;
 }) {
   return (
-    <div className="w-full flex flex-row justify-between p-[20px]">
+    <div className="w-full flex flex-row justify-between ">
       <div className="w-1/3">{title}: </div>
       <div className="w-2/3">{content}</div>
     </div>

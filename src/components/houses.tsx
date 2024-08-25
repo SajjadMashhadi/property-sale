@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useHouses } from "../api/useFetch";
 
 import HouseCard from "./houseCard";
+import EmptyPage from "./emptyPage";
 
 interface house {
   id: number;
@@ -30,19 +31,15 @@ export default function Houses() {
   };
 
   if (error) {
-    return <div>error</div>;
+    return <EmptyPage text="Error! Please try again later." />;
   }
 
   if (isPending) {
-    return <div>is loading...</div>;
+    return <EmptyPage text="Loading..." />;
   }
 
   if (houses && houses.length === 0) {
-    return (
-      <div className="w-3/4 flex items-center justify-center">
-        No House added!
-      </div>
-    );
+    return <EmptyPage text="No house added." />;
   }
 
   if (houses) {

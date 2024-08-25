@@ -15,6 +15,10 @@ interface UseFetchResult {
 
 const api = axios.create({
   baseURL: "http://localhost:3000",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer `,
+  },
 });
 
 //fetch houses
@@ -36,16 +40,20 @@ export const useHouses = (page: number, limit: number): UseFetchResult => {
         setData(res.data);
         setError(null);
         setIsPending(false);
-        console.log(res.data); // access your data which is limited to "10" per page
-        setDataLength(res.headers["x-total-count"]); // length of your data without page limit
+        console.log(res.data);
+        setDataLength(res.headers["x-total-count"]);
       })
-      .catch((err) => setError(err))
+      .catch((err) => {
+        console.log(err);
+        setError(err);
+      })
       .finally(() => setIsPending(false));
-  }, [page]);
+  }, [page, limit]);
 
   return { data, dataLength, isPending, error };
 };
 
+//fetch a house by id
 export const useHouse = (id: string): UseFetchResult => {
   const [data, setData] = useState<any | null>(null);
   const [isPending, setIsPending] = useState<boolean>(true);
@@ -58,7 +66,6 @@ export const useHouse = (id: string): UseFetchResult => {
         setData(res.data);
         setError(null);
         setIsPending(false);
-        console.log(res.data);
       })
       .catch((err) => setError(err))
       .finally(() => setIsPending(false));
@@ -77,12 +84,30 @@ export const addHouse = (body): void => {
     .catch((err) => console.log(err));
 };
 
+//delete house
+export const deleteHouse = (id: string) => {
+  return new Promise((resolve, reject) => {
+    api
+      .delete(`/houses/${id}`)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 //login
 export const login = (body: UserRegister) => {
   return new Promise((resolve, reject) => {
     api
       .post("/login", body)
       .then((response) => {
+        console.log(response.data.accessToken);
+        api.defaults.headers.common = {
+          Authorization: `Bearer ${response.data.accessToken}`,
+        };
         resolve(response);
       })
       .catch((error) => {

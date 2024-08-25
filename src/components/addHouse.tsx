@@ -38,15 +38,6 @@ export default function AddHouse() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    // fetch("http://localhost:3000/houses", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
-
     addHouse(formData);
   }
 

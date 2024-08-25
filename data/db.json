@@ -23,16 +23,6 @@
   ],
   "houses": [
     {
-      "address": "london sfs ",
-      "description": "fdsafsafsdfsdfsdaf",
-      "phone": "634654634",
-      "position": {
-        "lat": 51.505,
-        "lng": -0.09
-      },
-      "id": 5
-    },
-    {
       "address": "tehran ",
       "description": "dsafa fasfasdf dsaf asf a saf ",
       "phone": "42141234",
@@ -40,37 +30,8 @@
         "lat": 35.24561909420681,
         "lng": 51.67968750000001
       },
-      "id": 6
-    },
-    {
-      "address": "fsdfa",
-      "description": "",
-      "phone": "4234124",
-      "position": {
-        "lat": 51.07246834624619,
-        "lng": -0.14831542968750003
-      },
-      "id": 7
-    },
-    {
-      "address": "new london",
-      "description": "fdasfsadf",
-      "phone": "431241234",
-      "position": {
-        "lat": 51.505,
-        "lng": -0.09
-      },
-      "id": 8
-    },
-    {
-      "address": "fasfdasf fdsaf ",
-      "description": "f sadf asdfsd fsda fas ",
-      "phone": "431241234",
-      "position": {
-        "lat": 51.505,
-        "lng": -0.09
-      },
-      "id": 9
+      "id": 6,
+      "userId": 2
     },
     {
       "address": "fdsafsf",
@@ -101,6 +62,17 @@
         "lng": -0.09
       },
       "id": 12
+    },
+    {
+      "address": "fsdafsadf",
+      "description": "fdsafsda",
+      "phone": "12423432",
+      "position": {
+        "lat": 51.505,
+        "lng": -0.09
+      },
+      "userId": 1,
+      "id": 13
     }
   ]
 }
