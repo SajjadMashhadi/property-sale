@@ -4,7 +4,13 @@ import Input from "./input";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
 import { addHouse, editHouse } from "../api/useFetch";
 
 interface house {
@@ -15,6 +21,7 @@ interface house {
   id?: number;
 }
 
+//a component for both add and edit house
 export default function AddHouse({
   house,
   handleClose,
@@ -23,6 +30,19 @@ export default function AddHouse({
   handleClose?: () => void;
 }) {
   const navigateTo = useNavigate();
+
+  //set the location of the marker by clicking on the map
+  const LocationFinderDummy = () => {
+    const map = useMapEvents({
+      click(e) {
+        setFormData((formData) => ({
+          ...formData,
+          position: { lat: e.latlng.lat, lng: e.latlng.lng },
+        }));
+      },
+    });
+    return null;
+  };
 
   const [formData, setFormData] = useState<house>(
     house
@@ -35,6 +55,7 @@ export default function AddHouse({
         }
   );
 
+  //set the location by dragging the marker
   const markerRef = useRef(null);
   const eventHandlers = useMemo(
     () => ({
@@ -55,7 +76,7 @@ export default function AddHouse({
     e.preventDefault();
     if (house) {
       editHouse(house.id, formData)
-        .then(() => handleClose())
+        .then(() => navigateTo("/"))
         .catch((err) => console.log(err));
     } else {
       addHouse(formData)
@@ -122,6 +143,7 @@ export default function AddHouse({
                 <span>drag the marker</span>
               </Popup>
             </Marker>
+            <LocationFinderDummy />
           </MapContainer>
           {house ? (
             <div className="flex flex-row justify-start gap-[20px]">

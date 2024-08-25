@@ -40,7 +40,6 @@ export const useHouses = (page: number, limit: number): UseFetchResult => {
         setData(res.data);
         setError(null);
         setIsPending(false);
-        console.log(res.data);
         setDataLength(res.headers["x-total-count"]);
       })
       .catch((err) => {

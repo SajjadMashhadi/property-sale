@@ -44,7 +44,7 @@ export default function Houses() {
 
   if (houses) {
     return (
-      <div className="w-3/4 min-h-screen overflow-auto flex flex-col justify-between gap-[20px] p-[50px]">
+      <div className=" w-full md:w-3/4 min-h-screen overflow-auto flex flex-col justify-between gap-[20px] p-[50px]">
         <div className=" flex flex-col gap-[20px] ">
           {houses.map((house: house) => (
             <HouseCard key={house.id} address={house.address} id={house.id} />
