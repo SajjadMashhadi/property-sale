@@ -1,12 +1,34 @@
 import ThemeSwitch from "../components/themeSwitch";
 import { NavLink } from "react-router-dom";
 import Button from "./button";
+import Modal from "react-modal";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    padding: "0",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    borderRadious: "5px",
+  },
+};
+
 export default function Sidebar() {
+  //state for toggling side bar menu in mobile screens
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
-  const logout = () => {};
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const navigateTo = useNavigate();
+
+  //log out
+  const logout = () => {
+    navigateTo("/login");
+  };
   return (
     <>
       <button
@@ -61,9 +83,24 @@ export default function Sidebar() {
         <hr className="border-gray-300 dark:border-gray-500 my-[20px]" />
         <div className="flex flex-col gap-[20px] items-center mt-[20px]">
           <ThemeSwitch />
-          <Button text="log out" onClick={logout} />
+          <Button text="log out" onClick={() => setShowModal(true)} />
         </div>
       </div>
+      <Modal
+        ariaHideApp={false}
+        isOpen={showModal}
+        onAfterOpen={() => setShowModal(true)}
+        onRequestClose={() => setShowModal(false)}
+        style={customStyles}
+      >
+        <div className="dark:bg-gray-800 dark:text-gray-400 w-[300px] sm:w-[400px] p-[20px]  flex flex-col gap-[20px] items-center">
+          <p>Do you want to remove this item?</p>
+          <div className="flex flex-row justify-start gap-[20px]">
+            <Button text="no" onClick={() => setShowModal(false)} />
+            <Button text="yes" onClick={() => logout()} />
+          </div>
+        </div>
+      </Modal>
       <div
         onClick={() => setShowSidebar(false)}
         className={clsx("lg:none", {

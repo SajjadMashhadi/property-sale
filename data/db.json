@@ -23,12 +23,12 @@
   ],
   "houses": [
     {
-      "address": "fdsafsf",
+      "address": "popopopopo",
       "description": "some where",
       "phone": "412432",
       "position": {
-        "lat": 51.49303409238195,
-        "lng": -0.05218505859375001
+        "lat": 51.493205097596956,
+        "lng": -0.04068374633789063
       },
       "id": 10
     },

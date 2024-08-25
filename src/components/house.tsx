@@ -50,7 +50,7 @@ export default function House() {
   if (house) {
     return (
       <div className="w-full overflow-auto lg:w-3/4 p-[20px] py-[20px]  sm:p-[50px]">
-        <div className="w-full lg:w-[800px] flex flex-col gap-[20px]">
+        <div className="w-full xl:w-[800px] flex flex-col gap-[20px]">
           <h1 className="font-bold text-xl w-full text-center lg:text-left ">
             House Details
           </h1>

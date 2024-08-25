@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Button from "./button";
 import { login, signup } from "../api/useFetch";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Input from "./input";
 
 interface user {
   email: string;
@@ -41,36 +42,39 @@ export default function Signup({ registerType }: { registerType: string }) {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center justify-items-center items-center dark:bg-gray-700">
-      <div className=" 0 w-[700px] flex flex-col gap-[50px] bg-gray-50 p-[40px] border-none rounded-[5px]">
+      <div className=" 0 w-[400px] sm:w-[500px] md:w-[700px] flex flex-col gap-[50px] bg-gray-50 p-[40px] border-none rounded-[5px]">
         <h1 className="text-4xl  font-bold text-center">{registerType}</h1>
         <form
           className="flex flex-col gap-[30px]"
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div className="flex flex-row justify-between items-center">
-            <label htmlFor="email">Email:</label>
-            <input
-              className="w-[300px] h-[30px] placeholder:text-gray-400 dark:placeholder:text-gray-600 bg-inherit border-b-[#a3a3a341] focus:border-b-gray-400 border-b border-solid focus:outline-none "
-              type="text"
-              placeholder="Email"
-              value={formData.email}
-              name="email"
-              onChange={(e) => handleChange(e)}
-            ></input>
-          </div>
-          <div className="flex flex-row justify-between items-center">
-            <label htmlFor="password">Password:</label>
-            <input
-              className="w-[300px] h-[30px] placeholder:text-gray-400 dark:placeholder:text-gray-600 bg-inherit border-b-[#a3a3a341] focus:border-b-gray-400 border-b border-solid focus:outline-none "
-              type="text"
-              placeholder="Password"
-              value={formData.password}
-              name="password"
-              onChange={(e) => handleChange(e)}
-            ></input>
-          </div>
+          <Input
+            type="text"
+            label="email"
+            value={formData.email}
+            handleChange={handleChange}
+          />
+          <Input
+            type="text"
+            label="password"
+            value={formData.password}
+            handleChange={handleChange}
+          />
+
           <div className="flex flex-row justify-center">
             <Button text={registerType} />
+          </div>
+          <div className="w-full text-xs flex justify-center">
+            {registerType === "signup"
+              ? "already have an account? "
+              : "don't have an account? "}
+            <Link to={registerType === "signup" ? "/login" : "/signup"}>
+              {" "}
+              <span className="font-bold mx-[2px] text-[16px]">
+                {registerType === "signup" ? " login" : " signup"}
+              </span>{" "}
+              here
+            </Link>
           </div>
         </form>
       </div>

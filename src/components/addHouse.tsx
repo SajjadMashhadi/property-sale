@@ -92,11 +92,14 @@ export default function AddHouse({
   return (
     <div
       className={clsx(
-        "overflow-auto w-full lg:w-3/4 flex flex-row justify-center p-[20px] md:p-[50px]",
-        { "w-full h-fit p-0 dark:bg-gray-800 dark:text-gray-400": house }
+        "overflow-auto w-full lg:w-3/4 flex flex-row justify-center px-[20px] md:p-[50px]",
+        {
+          "min-w-[300px] lg:w-full h-fit px-[10px] dark:bg-gray-800 dark:text-gray-400 md:p-0 overflow-y-auto":
+            house,
+        }
       )}
     >
-      <div className="w-[800px] flex flex-col gap-[20px]">
+      <div className="w-full lg:w-[800px] flex flex-col gap-[20px]">
         {!house && (
           <h1 className="font-bold text-xl w-full text-center">Add House</h1>
         )}
@@ -148,7 +151,7 @@ export default function AddHouse({
             <LocationFinderDummy />
           </MapContainer>
           {house ? (
-            <div className="flex flex-row justify-start gap-[20px]">
+            <div className=" w-full flex flex-col sm:flex-row justify-start gap-[20px]">
               <Button text="close" onClick={() => handleClose()} />
               <Button text="edit" />
             </div>
