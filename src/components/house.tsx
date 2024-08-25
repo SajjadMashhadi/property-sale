@@ -49,18 +49,16 @@ export default function House() {
 
   if (house) {
     return (
-      <div className="w-3/4 p-[50px]">
-        <div className="w-[800px] flex flex-col gap-[20px]">
-          <h1 className="font-bold text-xl w-full ">House Details</h1>
+      <div className="w-full overflow-auto lg:w-3/4 p-[20px] py-[20px]  sm:p-[50px]">
+        <div className="w-full lg:w-[800px] flex flex-col gap-[20px]">
+          <h1 className="font-bold text-xl w-full text-center lg:text-left ">
+            House Details
+          </h1>
           <DetailFiels title="Address" content={house.address} />
           <DetailFiels title="Description" content={house.description} />
+          <DetailFiels title="Phone" content={house.phone} />
           <MapContainer
-            style={{
-              height: "300px",
-              width: "700px",
-              borderRadius: "5px",
-              zIndex: "0",
-            }}
+            className="h-[300px] w-full  rounded-[5px] z-0"
             center={[house.position.lat, house.position.lng]}
             zoom={13}
             scrollWheelZoom={false}
@@ -71,7 +69,7 @@ export default function House() {
             />
             <Marker draggable={false} position={house.position}></Marker>
           </MapContainer>
-          <div className="flex flex-row justify-start gap-[20px]">
+          <div className="flex flex-col sm:flex-row justify-start gap-[20px]">
             <Button text="edit" onClick={() => setEditModal(true)} />
             <Button onClick={() => setDeleteModal(true)} text="remove" />
           </div>
@@ -82,7 +80,7 @@ export default function House() {
             onRequestClose={() => setDeleteModal(false)}
             style={customStyles}
           >
-            <div className="dark:bg-gray-800 dark:text-gray-400 w-[400px] p-[20px]  flex flex-col gap-[20px] items-center">
+            <div className="dark:bg-gray-800 dark:text-gray-400 w-[300px] sm:w-[400px] p-[20px]  flex flex-col gap-[20px] items-center">
               <p>Do you want to remove this item?</p>
               <div className="flex flex-row justify-start gap-[20px]">
                 <Button text="no" onClick={() => setDeleteModal(false)} />

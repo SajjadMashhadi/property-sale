@@ -92,7 +92,7 @@ export default function AddHouse({
   return (
     <div
       className={clsx(
-        "overflow-auto w-3/4 flex flex-row justify-center p-[50px]",
+        "overflow-auto w-full lg:w-3/4 flex flex-row justify-center p-[20px] md:p-[50px]",
         { "w-full h-fit p-0 dark:bg-gray-800 dark:text-gray-400": house }
       )}
     >
@@ -101,7 +101,7 @@ export default function AddHouse({
           <h1 className="font-bold text-xl w-full text-center">Add House</h1>
         )}
         <form
-          className="flex flex-col gap-[30px] items-center  p-[50px]"
+          className="flex flex-col gap-[30px] items-center py-[20px] sm:p-[50px]"
           onSubmit={(e) => handleSubmit(e)}
         >
           <Input
@@ -124,10 +124,10 @@ export default function AddHouse({
           />
 
           <MapContainer
-            style={{ height: "300px", width: "700px", borderRadius: "5px" }}
             center={
               house ? [house.position.lat, house.position.lng] : [51.505, -0.09]
             }
+            className="h-[300px] w-full  rounded-[5px]"
             zoom={13}
             scrollWheelZoom={false}
           >

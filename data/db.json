@@ -23,17 +23,6 @@
   ],
   "houses": [
     {
-      "address": "tehran ",
-      "description": "dsafa fasfasdf dsaf asf a saf ",
-      "phone": "42141234",
-      "position": {
-        "lat": 35.24561909420681,
-        "lng": 51.67968750000001
-      },
-      "id": 6,
-      "userId": 2
-    },
-    {
       "address": "fdsafsf",
       "description": "some where",
       "phone": "412432",

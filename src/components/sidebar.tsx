@@ -19,7 +19,7 @@ export default function Sidebar() {
         className={clsx(
           "w-[300px] absolute  lg:left-0   lg:relative lg:w-1/4 h-full flex flex-col gap-[10px] bg-gray-50 dark:bg-gray-700 p-[10px] pt-[30px]",
           {
-            "left-0 z-[1000] transition-all duration-[0.7s]": showSidebar,
+            "left-0 z-[10000] transition-all duration-[0.7s]": showSidebar,
             "left-[-300px] transition-all duration-[0.7s]": !showSidebar,
           }
         )}

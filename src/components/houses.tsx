@@ -45,19 +45,19 @@ export default function Houses() {
 
   if (houses) {
     return (
-      <div className="  w-full lg:w-3/4 min-h-screen overflow-auto flex flex-col justify-between gap-[20px] p-[50px]">
-        <h1 className="m-y-[10px] text-xl font-bold text-center lg:none">
+      <div className="  w-full lg:w-3/4 min-h-screen overflow-auto flex flex-col justify-between gap-[20px] py-[20px] px-[10px] sm:p-[50px]">
+        <h1 className="m-y-[10px] text-xl font-bold text-center lg:hidden">
           Houses
         </h1>
-        <div className=" flex flex-col gap-[20px] ">
+        <div className=" flex flex-col gap-[20px]  ">
           {houses.map((house: house) => (
             <HouseCard key={house.id} address={house.address} id={house.id} />
           ))}
         </div>
         <div className="flex flex-row justify-center">
-          <div className="w-[500px] flex flex-row justify-around">
+          <div className="w-[500px] flex flex-col sm:flex-row justify-around">
             <Button text="previous" onClick={() => handlePreviousPage()} />
-            <div className="h-[40px] flex items-center">
+            <div className="h-[40px] flex items-center justify-center w-full">
               page {page} of {totalPages}
             </div>
             <Button text="next" onClick={() => handleNextPage()} />
