@@ -9,6 +9,16 @@
       "email": "qwer@gmail.com",
       "password": "$2a$10$Cdvzt5QxDQmOyrQEzncP/u40tHGM.3qObbhuHPpu4bMeF2Ep2Whjm",
       "id": 2
+    },
+    {
+      "email": "test@fdsaf.com",
+      "password": "$2a$10$YVosjRx/bkvQErsw.Yr7PeLsXMk1XP0kV82FMiUWsLJjaEr9Czky6",
+      "id": 3
+    },
+    {
+      "email": "teafdsaf@fdasf.com",
+      "password": "$2a$10$Hheq4AvHrZcYm4ZEw9FaeuLBm52hfCH5Uv5D3WyLWOAtNQVlUC8OO",
+      "id": 4
     }
   ],
   "houses": [
@@ -31,6 +41,66 @@
         "lng": 51.67968750000001
       },
       "id": 6
+    },
+    {
+      "address": "fsdfa",
+      "description": "",
+      "phone": "4234124",
+      "position": {
+        "lat": 51.07246834624619,
+        "lng": -0.14831542968750003
+      },
+      "id": 7
+    },
+    {
+      "address": "new london",
+      "description": "fdasfsadf",
+      "phone": "431241234",
+      "position": {
+        "lat": 51.505,
+        "lng": -0.09
+      },
+      "id": 8
+    },
+    {
+      "address": "fasfdasf fdsaf ",
+      "description": "f sadf asdfsd fsda fas ",
+      "phone": "431241234",
+      "position": {
+        "lat": 51.505,
+        "lng": -0.09
+      },
+      "id": 9
+    },
+    {
+      "address": "fdsafsf",
+      "description": "some where",
+      "phone": "412432",
+      "position": {
+        "lat": 51.49303409238195,
+        "lng": -0.05218505859375001
+      },
+      "id": 10
+    },
+    {
+      "address": "fasdfdsaf",
+      "description": "fsadfsdaf",
+      "phone": "4321432",
+      "position": {
+        "lat": 51.505,
+        "lng": -0.09
+      },
+      "id": 11
+    },
+    {
+      "address": "fasdfdsaf",
+      "description": "fsadfsdaf",
+      "phone": "4321432",
+      "position": {
+        "lat": 51.505,
+        "lng": -0.09
+      },
+      "id": 12
     }
   ]
 }

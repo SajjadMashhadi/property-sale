@@ -1,4 +1,5 @@
-import useFetch from "../api/useFetch";
+import { useState } from "react";
+import { useHouses } from "../api/useFetch";
 
 import HouseCard from "./houseCard";
 
@@ -8,14 +9,25 @@ interface house {
   description: string;
 }
 
-export default function Houses() {
-  //   const [houses, setHouses] = useState<house[] | null>();
+const limit = 7;
 
-  const {
-    data: houses,
-    isPending,
-    error,
-  } = useFetch("http://localhost:3000/houses");
+export default function Houses() {
+  const [page, setPage] = useState<number>(1);
+
+  const { data: houses, dataLength, isPending, error } = useHouses(page, limit);
+
+  const totalPages = Math.ceil(dataLength / limit);
+
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      setPage((page) => page + 1);
+    }
+  };
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage((page) => page - 1);
+    }
+  };
 
   if (error) {
     return <div>error</div>;
@@ -35,10 +47,21 @@ export default function Houses() {
 
   if (houses) {
     return (
-      <div className="w-3/4 flex flex-col gap-[20px] p-[50px]">
-        {houses.map((house: house) => (
-          <HouseCard key={house.id} address={house.address} id={house.id} />
-        ))}
+      <div className="w-3/4 min-h-screen overflow-auto flex flex-col justify-between gap-[20px] p-[50px]">
+        <div className=" flex flex-col gap-[20px] ">
+          {houses.map((house: house) => (
+            <HouseCard key={house.id} address={house.address} id={house.id} />
+          ))}
+        </div>
+        <div className="flex flex-row justify-center">
+          <div className="w-[500px] flex flex-row justify-around">
+            <button onClick={() => handlePreviousPage()}>previous page</button>
+            <div>
+              page {page} of {totalPages}
+            </div>
+            <button onClick={() => handleNextPage()}>next page</button>
+          </div>
+        </div>
       </div>
     );
   }

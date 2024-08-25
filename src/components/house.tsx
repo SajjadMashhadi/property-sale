@@ -1,15 +1,17 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../api/useFetch";
+import useFetch, { useHouse } from "../api/useFetch";
 import DetailFiels from "./detailField";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
 export default function House() {
   const { id } = useParams();
-  const {
-    data: house,
-    error,
-    isPending,
-  } = useFetch("http://localhost:3000/houses/" + id);
+  // const {
+  //   data: house,
+  //   error,
+  //   isPending,
+  // } = useFetch("http://localhost:3000/houses/" + id);
+
+  const { data: house, error, isPending } = useHouse(id);
 
   if (error) {
     return <div>error</div>;

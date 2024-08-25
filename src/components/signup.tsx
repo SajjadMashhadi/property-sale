@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./button";
+import { login, signup } from "../api/useFetch";
 
 interface user {
   email: string;
@@ -15,21 +16,13 @@ export default function Signup({ registerType }: { registerType: string }) {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (registerType === "login") {
-      fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
+      login(formData)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     } else {
-      fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
+      signup(formData)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   }
 
