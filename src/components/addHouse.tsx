@@ -125,7 +125,9 @@ export default function AddHouse({
 
           <MapContainer
             style={{ height: "300px", width: "700px", borderRadius: "5px" }}
-            center={[51.505, -0.09]}
+            center={
+              house ? [house.position.lat, house.position.lng] : [51.505, -0.09]
+            }
             zoom={13}
             scrollWheelZoom={false}
           >

@@ -11,14 +11,17 @@ export default function Sidebar() {
     <>
       <button
         onClick={() => setShowSidebar(true)}
-        className="block md:hidden absolute left-[20px] top-[20px]"
+        className="block lg:hidden absolute left-[20px] top-[20px]"
       >
         show menu
       </button>
       <div
         className={clsx(
-          "w-[300px] absolute  md:left-0   md:relative md:w-1/4 h-full flex flex-col gap-[10px] bg-gray-50 dark:bg-gray-700 p-[10px] pt-[30px]",
-          { "left-0 z-[1000]": showSidebar, "left-[-300px]": !showSidebar }
+          "w-[300px] absolute  lg:left-0   lg:relative lg:w-1/4 h-full flex flex-col gap-[10px] bg-gray-50 dark:bg-gray-700 p-[10px] pt-[30px]",
+          {
+            "left-0 z-[1000] transition-all duration-[0.7s]": showSidebar,
+            "left-[-300px] transition-all duration-[0.7s]": !showSidebar,
+          }
         )}
       >
         <h1 className="text-[24px] text-center dark:text-white">
@@ -26,6 +29,7 @@ export default function Sidebar() {
         </h1>
         <div className="flex flex-col gap-[10px] mt-[20px] ">
           <NavLink
+            onClick={() => setShowSidebar(false)}
             to="/"
             className={({ isActive }) =>
               [
@@ -41,6 +45,7 @@ export default function Sidebar() {
 
           <NavLink
             to="/addHouse"
+            onClick={() => setShowSidebar(false)}
             className={({ isActive }) =>
               [
                 "h-[50px] rounded-[5px] flex pl-[10px] items-center ",
@@ -61,8 +66,8 @@ export default function Sidebar() {
       </div>
       <div
         onClick={() => setShowSidebar(false)}
-        className={clsx("md:none", {
-          "w-full min-h-screen absolute ": showSidebar,
+        className={clsx("lg:none", {
+          "w-full min-h-screen absolute z-[500]  ": showSidebar,
           none: !showSidebar,
         })}
       ></div>

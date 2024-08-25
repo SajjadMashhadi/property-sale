@@ -3,6 +3,7 @@ import { useHouses } from "../api/useFetch";
 
 import HouseCard from "./houseCard";
 import EmptyPage from "./emptyPage";
+import Button from "./button";
 
 interface house {
   id: number;
@@ -44,7 +45,10 @@ export default function Houses() {
 
   if (houses) {
     return (
-      <div className=" w-full md:w-3/4 min-h-screen overflow-auto flex flex-col justify-between gap-[20px] p-[50px]">
+      <div className="  w-full lg:w-3/4 min-h-screen overflow-auto flex flex-col justify-between gap-[20px] p-[50px]">
+        <h1 className="m-y-[10px] text-xl font-bold text-center lg:none">
+          Houses
+        </h1>
         <div className=" flex flex-col gap-[20px] ">
           {houses.map((house: house) => (
             <HouseCard key={house.id} address={house.address} id={house.id} />
@@ -52,11 +56,11 @@ export default function Houses() {
         </div>
         <div className="flex flex-row justify-center">
           <div className="w-[500px] flex flex-row justify-around">
-            <button onClick={() => handlePreviousPage()}>previous page</button>
-            <div>
+            <Button text="previous" onClick={() => handlePreviousPage()} />
+            <div className="h-[40px] flex items-center">
               page {page} of {totalPages}
             </div>
-            <button onClick={() => handleNextPage()}>next page</button>
+            <Button text="next" onClick={() => handleNextPage()} />
           </div>
         </div>
       </div>
