@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "./button";
 import { login, signup } from "../api/useFetch";
+import { useNavigate } from "react-router-dom";
 
 interface user {
   email: string;
@@ -8,6 +9,7 @@ interface user {
 }
 
 export default function Signup({ registerType }: { registerType: string }) {
+  const navigateTo = useNavigate();
   const [formData, setFormData] = useState<user>({
     email: "",
     password: "",
@@ -15,13 +17,21 @@ export default function Signup({ registerType }: { registerType: string }) {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    //login
     if (registerType === "login") {
       login(formData)
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res);
+          navigateTo("/");
+        })
         .catch((err) => console.log(err));
     } else {
+      //signup
       signup(formData)
-        .then((res) => console.log(res))
+        .then((res) => {
+          navigateTo("/");
+          console.log(res);
+        })
         .catch((err) => console.log(err));
     }
   }
