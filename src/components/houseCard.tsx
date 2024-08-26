@@ -9,7 +9,7 @@ export default function HouseCard({
 }) {
   return (
     <Link
-      className="w-full h-[60px] dark:bg-gray-700 bg-gray-50 flex items-center p-[10px] rounded-[5px]"
+      className="w-full min-h-[60px] h-fit dark:bg-gray-700 bg-gray-50 flex items-center p-[10px] rounded-[5px]"
       to={`/houses/${id}`}
     >
       <div>

@@ -39,6 +39,7 @@ export default function AddHouse({
           position: { lat: 51.505, lng: -0.09 },
         }
   );
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigateTo = useNavigate();
 
@@ -71,14 +72,18 @@ export default function AddHouse({
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (house) {
-      editHouse(house.id, formData)
-        .then(() => navigateTo("/"))
-        .catch((err) => console.log(err));
+    if (!formData.address || !formData.description || !formData.phone) {
+      setErrorMessage("Please fill all the inputs");
     } else {
-      addHouse(formData)
-        .then(() => navigateTo("/"))
-        .catch((err) => console.log(err));
+      if (house) {
+        editHouse(house.id, formData)
+          .then(() => navigateTo("/"))
+          .catch((err) => console.log(err));
+      } else {
+        addHouse(formData)
+          .then(() => navigateTo("/"))
+          .catch((err) => console.log(err));
+      }
     }
   }
 
@@ -91,17 +96,20 @@ export default function AddHouse({
       className={clsx(
         "overflow-auto w-full lg:w-3/4 flex flex-row justify-center px-[20px] md:p-[50px]",
         {
-          "min-w-[300px] lg:w-full h-fit px-[10px] dark:bg-gray-800 dark:text-gray-400 md:p-0 overflow-y-auto":
+          "min-w-[300px] lg:w-full py-[10px] h-fit px-[10px] dark:bg-gray-800 dark:text-gray-400 md:p-0 overflow-y-auto":
             house,
         }
       )}
     >
-      <div className="w-full lg:w-[800px] flex flex-col gap-[20px]">
+      <div className="w-full lg:w-[800px] flex flex-col gap-[20px] p-0">
         {!house && (
           <h1 className="font-bold text-xl w-full text-center">Add House</h1>
         )}
+        <div className="text-red-600 text-[12px] leading-[0] text-center">
+          {errorMessage ? errorMessage + "!" : ""}
+        </div>
         <form
-          className="flex flex-col gap-[30px] items-center py-[20px] sm:p-[50px]"
+          className="flex flex-col gap-[10px] sm:gap-[20px] md:gap-[30px] items-center py-[10px] sm:p-[10px]"
           onSubmit={(e) => handleSubmit(e)}
         >
           <Input
@@ -127,7 +135,7 @@ export default function AddHouse({
             center={
               house ? [house.position.lat, house.position.lng] : [51.505, -0.09]
             }
-            className="h-[300px] w-full  rounded-[5px]"
+            className="h-[300px] w-full  rounded-[5px] z-0"
             zoom={13}
             scrollWheelZoom={false}
           >

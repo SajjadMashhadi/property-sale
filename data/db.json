@@ -33,12 +33,12 @@
       "id": 10
     },
     {
-      "address": "fasdfdsaf",
+      "address": "Bupa Health Centre, Basinghall Street, Cheap, City of London, Greater London, England, EC2V 5AG, United Kingdom",
       "description": "fsadfsdaf",
       "phone": "4321432",
       "position": {
-        "lat": 51.51656256453166,
-        "lng": -0.06808090314734729
+        "lat": 51.51521657733008,
+        "lng": -0.09098052978515626
       },
       "id": 11
     },
@@ -53,55 +53,25 @@
       "id": 12
     },
     {
-      "address": "fsdafsadf",
-      "description": "fdsafsda",
+      "address": "Kensington Gardens, Poplar Place, Bayswater, London, Greater London, England, W2 4AN, United Kingdom",
+      "description": "fasfsaf",
       "phone": "12423432",
       "position": {
-        "lat": 51.505,
-        "lng": -0.09
+        "lat": 51.5051524550017,
+        "lng": -0.17852783203125003
       },
       "userId": 1,
       "id": 13
     },
     {
-      "address": "ouiou",
+      "address": "The Long Walk, Long Walk Gate, Windsor, Royal Borough of Windsor and Maidenhead, England, SL4 2AB, United Kingdom",
       "description": "xzvxcvz",
       "phone": "431241",
       "position": {
-        "lat": 51.505,
-        "lng": -0.09
+        "lat": 51.47385614773594,
+        "lng": -0.6042480468750001
       },
       "id": 14
-    },
-    {
-      "address": "ouiou",
-      "description": "xzvxcvz",
-      "phone": "431241",
-      "position": {
-        "lat": 51.505,
-        "lng": -0.09
-      },
-      "id": 15
-    },
-    {
-      "address": "poiuopi",
-      "description": "klhjl",
-      "phone": "4134123",
-      "position": {
-        "lat": 51.505,
-        "lng": -0.09
-      },
-      "id": 16
-    },
-    {
-      "address": "vbnvcnvcnc",
-      "description": "sfadf",
-      "phone": "43124123",
-      "position": {
-        "lat": 51.505,
-        "lng": -0.09
-      },
-      "id": 17
     },
     {
       "address": "Vital Ingredient, Cullum Street, Cornhill, City of London, Greater London, England, EC3M 7JJ, United Kingdom",
@@ -122,6 +92,16 @@
         "lng": -0.0872039794921875
       },
       "id": 19
+    },
+    {
+      "address": "Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 2AP, United Kingdom",
+      "description": "fdasf",
+      "phone": "4312421",
+      "position": {
+        "lat": 51.50489601254001,
+        "lng": -0.08022729685314367
+      },
+      "id": 20
     }
   ]
 }

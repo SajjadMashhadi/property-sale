@@ -41,7 +41,7 @@ export default function Sidebar() {
         className={clsx(
           "w-[300px] absolute  lg:left-0   lg:relative lg:w-1/4 h-full flex flex-col gap-[10px] bg-gray-50 dark:bg-gray-700 p-[10px] pt-[30px]",
           {
-            "left-0 z-[10000] transition-all duration-[0.7s]": showSidebar,
+            "left-0 z-[1000] transition-all duration-[0.7s]": showSidebar,
             "left-[-300px] transition-all duration-[0.7s]": !showSidebar,
           }
         )}
@@ -83,7 +83,13 @@ export default function Sidebar() {
         <hr className="border-gray-300 dark:border-gray-500 my-[20px]" />
         <div className="flex flex-col gap-[20px] items-center mt-[20px]">
           <ThemeSwitch />
-          <Button text="log out" onClick={() => setShowModal(true)} />
+          <Button
+            text="log out"
+            onClick={() => {
+              setShowModal(true);
+              setShowSidebar(false);
+            }}
+          />
         </div>
       </div>
       <Modal
@@ -93,7 +99,7 @@ export default function Sidebar() {
         onRequestClose={() => setShowModal(false)}
         style={customStyles}
       >
-        <div className="dark:bg-gray-800 dark:text-gray-400 w-[300px] sm:w-[400px] p-[20px]  flex flex-col gap-[20px] items-center">
+        <div className="dark:bg-gray-800 dark:text-gray-400 z-2000 w-[300px] sm:w-[400px] p-[20px]  flex flex-col gap-[20px] items-center">
           <p>Do you want to remove this item?</p>
           <div className="flex flex-row justify-start gap-[20px]">
             <Button text="no" onClick={() => setShowModal(false)} />
