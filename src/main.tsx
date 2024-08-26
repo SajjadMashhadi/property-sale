@@ -7,23 +7,31 @@ import Houses from "./components/houses.tsx";
 import House from "./components/house.tsx";
 import Signup from "./components/signup.tsx";
 import AddHouse from "./components/addHouse.tsx";
+import ProtectedRoute from "./components/protectedRoute.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <ProtectedRoute />,
     children: [
       {
         path: "/",
-        element: <Houses />,
-      },
-      {
-        path: "/addHouse",
-        element: <AddHouse />,
-      },
-      {
-        path: "/houses/:id",
-        element: <House />,
+        element: <App />,
+
+        children: [
+          {
+            path: "/",
+            element: <Houses />,
+          },
+          {
+            path: "/addHouse",
+            element: <AddHouse />,
+          },
+          {
+            path: "/houses/:id",
+            element: <House />,
+          },
+        ],
       },
     ],
   },

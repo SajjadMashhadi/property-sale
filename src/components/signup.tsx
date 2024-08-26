@@ -3,6 +3,7 @@ import Button from "./button";
 import { login, signup } from "../api/useFetch";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "./input";
+import { useLocalStorage } from "usehooks-ts";
 
 interface user {
   email: string;
@@ -17,12 +18,15 @@ export default function Signup({ registerType }: { registerType: string }) {
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const [token, setToken] = useLocalStorage("token", null);
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     //login
     if (registerType === "login") {
       login(formData)
-        .then(() => {
+        .then((res) => {
+          setToken(res.data.accessToken);
           navigateTo("/");
         })
         .catch((err) => {

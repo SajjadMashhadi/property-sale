@@ -4,6 +4,7 @@ import Button from "./button";
 import Modal from "react-modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "usehooks-ts";
 import clsx from "clsx";
 
 const customStyles = {
@@ -23,10 +24,12 @@ export default function Sidebar() {
   //state for toggling side bar menu in mobile screens
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [token, setToken] = useLocalStorage("token");
   const navigateTo = useNavigate();
 
   //log out
   const logout = () => {
+    setToken(null);
     navigateTo("/login");
   };
   return (
