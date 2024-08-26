@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocalStorage } from "usehooks-ts";
 
 interface UserRegister {
   email: string;
@@ -21,6 +22,17 @@ const api = axios.create({
   },
 });
 
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 //fetch houses
 export const useHouses = (page: number, limit: number): UseFetchResult => {
   const [data, setData] = useState<any | null>(null);
@@ -28,12 +40,16 @@ export const useHouses = (page: number, limit: number): UseFetchResult => {
   const [isPending, setIsPending] = useState<boolean>(true);
   const [error, setError] = useState<any | null>(null);
 
+  const [userId] = useLocalStorage("userId", null);
+
   useEffect(() => {
     api
-      .get("/houses", {
+      // .get("/600/houses", {
+      .get(`/640/houses`, {
         params: {
           _page: page,
           _limit: limit,
+          userId,
         },
       })
       .then((res) => {
@@ -44,10 +60,13 @@ export const useHouses = (page: number, limit: number): UseFetchResult => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.status === 401) {
+          logout();
+        }
         setError(err);
       })
       .finally(() => setIsPending(false));
-  }, [page, limit]);
+  }, [page, limit, userId]);
 
   return { data, dataLength, isPending, error };
 };
@@ -60,13 +79,16 @@ export const useHouse = (id: string): UseFetchResult => {
 
   useEffect(() => {
     api
-      .get(`/houses/${id}`)
+      .get(`/600/houses/${id}`)
       .then((res) => {
         setData(res.data);
         setError(null);
         setIsPending(false);
       })
-      .catch((err) => setError(err))
+      .catch((err) => {
+        setError(err);
+        console.log(err);
+      })
       .finally(() => setIsPending(false));
   }, [id]);
 
@@ -91,7 +113,7 @@ export const getAddress = (lat: number, lng: number) => {
 export const addHouse = (body) => {
   return new Promise((resolve, reject) => {
     api
-      .post("/houses", body)
+      .post("/600/houses", body)
       .then((response) => {
         resolve(response);
       })
@@ -105,7 +127,7 @@ export const addHouse = (body) => {
 export const editHouse = (id, body) => {
   return new Promise((resolve, reject) => {
     api
-      .put(`/houses/${id}`, body)
+      .put(`/600/houses/${id}`, body)
       .then((response) => {
         resolve(response);
       })
@@ -119,7 +141,7 @@ export const editHouse = (id, body) => {
 export const deleteHouse = (id: string) => {
   return new Promise((resolve, reject) => {
     api
-      .delete(`/houses/${id}`)
+      .delete(`/600/houses/${id}`)
       .then((response) => {
         resolve(response);
       })
@@ -127,6 +149,12 @@ export const deleteHouse = (id: string) => {
         reject(error);
       });
   });
+};
+
+//logout
+export const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
 };
 
 //login

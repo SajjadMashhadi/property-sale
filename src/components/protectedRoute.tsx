@@ -3,6 +3,7 @@ import { useLocalStorage } from "usehooks-ts";
 
 export default function ProtectedRoute() {
   const [token] = useLocalStorage("token", null);
+  const [userId] = useLocalStorage("userId", null);
 
-  return token ? <Outlet /> : <Navigate to="/login" />;
+  return token && userId ? <Outlet /> : <Navigate to="/login" />;
 }

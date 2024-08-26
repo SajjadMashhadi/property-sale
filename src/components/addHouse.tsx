@@ -1,16 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 import Button from "./button";
 import Input from "./input";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "usehooks-ts";
 
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { addHouse, editHouse, getAddress } from "../api/useFetch";
 
 interface house {
@@ -19,6 +14,7 @@ interface house {
   phone: string;
   position: { lat: number; lng: number };
   id?: number;
+  userId?: number;
 }
 
 //a component for both add and edit house
@@ -29,6 +25,8 @@ export default function AddHouse({
   house?: house;
   handleClose?: () => void;
 }) {
+  const [userId] = useLocalStorage("userId", null);
+
   const [formData, setFormData] = useState<house>(
     house
       ? house
@@ -80,7 +78,7 @@ export default function AddHouse({
           .then(() => navigateTo("/"))
           .catch((err) => console.log(err));
       } else {
-        addHouse(formData)
+        addHouse({ ...formData, userId })
           .then(() => navigateTo("/"))
           .catch((err) => console.log(err));
       }

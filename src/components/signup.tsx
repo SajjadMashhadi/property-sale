@@ -19,6 +19,7 @@ export default function Signup({ registerType }: { registerType: string }) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [, setToken] = useLocalStorage("token", null);
+  const [, setUserId] = useLocalStorage("userId", null);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,6 +28,7 @@ export default function Signup({ registerType }: { registerType: string }) {
       login(formData)
         .then((res) => {
           setToken(res.data.accessToken);
+          setUserId(res.data.user.id);
           navigateTo("/");
         })
         .catch((err) => {
@@ -36,7 +38,9 @@ export default function Signup({ registerType }: { registerType: string }) {
       //signup
       signup(formData)
         .then((res) => {
-          navigateTo("/");
+          setToken(res.data.accessToken);
+          setUserId(res.data.user.id);
+          navigateTo("/addHouse");
           console.log(res);
         })
         .catch((err) => {
