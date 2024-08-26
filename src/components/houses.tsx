@@ -11,14 +11,14 @@ interface house {
   description: string;
 }
 
-const limit = 7;
+const limit = 6;
 
 export default function Houses() {
   const [page, setPage] = useState<number>(1);
 
   const { data: houses, dataLength, isPending, error } = useHouses(page, limit);
 
-  const totalPages = Math.ceil(dataLength / limit);
+  const totalPages = dataLength ? Math.ceil(dataLength / limit) : 1;
 
   const handleNextPage = () => {
     if (page < totalPages) {
@@ -45,11 +45,11 @@ export default function Houses() {
 
   if (houses) {
     return (
-      <div className="  w-full lg:w-3/4 min-h-screen overflow-auto flex flex-col justify-between gap-[20px] py-[20px] px-[10px] sm:p-[50px]">
+      <div className="  w-full lg:w-3/4 sm:items-center min-h-screen overflow-auto flex flex-col justify-between gap-[20px] py-[20px] px-[10px] sm:p-[50px]">
         <h1 className="m-y-[10px] text-xl font-bold text-center lg:hidden">
           Houses
         </h1>
-        <div className=" flex flex-col gap-[20px]  ">
+        <div className=" w-full md:w-[600px] lg:w-[650px] xl:w-[850px] 2xl:w-[1000px] flex flex-row flex-wrap gap-[20px] px-[30px] pt-[50px]  ">
           {houses.map((house: house) => (
             <HouseCard key={house.id} address={house.address} id={house.id} />
           ))}

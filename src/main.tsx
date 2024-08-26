@@ -8,6 +8,7 @@ import House from "./components/house.tsx";
 import Signup from "./components/signup.tsx";
 import AddHouse from "./components/addHouse.tsx";
 import ProtectedRoute from "./components/protectedRoute.tsx";
+import ThemeSwitch from "./components/themeSwitch.tsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <ThemeSwitch />
     <RouterProvider router={router} />
   </StrictMode>
 );

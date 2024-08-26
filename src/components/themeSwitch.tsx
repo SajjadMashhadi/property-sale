@@ -15,9 +15,11 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <Button
-      text={`${theme === "light" ? "dark" : "light"} mode`}
-      onClick={handleToggle}
-    />
+    <div className="absolute top-[20px] right-[40px]">
+      <Button
+        text={`${theme === "light" ? "dark" : "light"} mode`}
+        onClick={handleToggle}
+      />
+    </div>
   );
 }

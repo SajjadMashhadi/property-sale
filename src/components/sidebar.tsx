@@ -85,7 +85,6 @@ export default function Sidebar() {
         </div>
         <hr className="border-gray-300 dark:border-gray-500 my-[20px]" />
         <div className="flex flex-col gap-[20px] items-center mt-[20px]">
-          <ThemeSwitch />
           <Button
             text="log out"
             onClick={() => {

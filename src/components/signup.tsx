@@ -18,7 +18,7 @@ export default function Signup({ registerType }: { registerType: string }) {
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const [token, setToken] = useLocalStorage("token", null);
+  const [, setToken] = useLocalStorage("token", null);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,15 +59,17 @@ export default function Signup({ registerType }: { registerType: string }) {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center justify-items-center items-center dark:bg-gray-700">
-      <div className=" 0 w-[400px] sm:w-[500px] md:w-[700px] flex flex-col gap-[50px] bg-gray-50 p-[40px] border-none rounded-[5px]">
-        <h1 className="text-4xl  font-bold text-center">{registerType}</h1>
+      <div className=" 0 w-[350px] sm:w-[500px] md:w-[600px] flex flex-col gap-[50px] bg-gray-50 dark:bg-[#202c3c] text-gray-600 dark:text-gray-200 p-[40px]  border-none rounded-[10px]">
+        <h1 className="text-4xl  font-bold text-center capitalize">
+          {registerType}
+        </h1>
 
         <div className="text-red-600 text-[12px] leading-[0] text-center">
           {errorMessage ? errorMessage + "!" : ""}
         </div>
 
         <form
-          className="flex flex-col gap-[30px]"
+          className="flex flex-col gap-[30px] lg:px-[50px]"
           onSubmit={(e) => handleSubmit(e)}
         >
           <Input
@@ -83,7 +85,7 @@ export default function Signup({ registerType }: { registerType: string }) {
             handleChange={handleChange}
           />
 
-          <div className="flex flex-row justify-center">
+          <div className="flex flex-row justify-center mt-[20px]">
             <Button text={registerType} />
           </div>
           <div className="w-full text-xs flex justify-center">

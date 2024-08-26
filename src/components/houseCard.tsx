@@ -9,12 +9,12 @@ export default function HouseCard({
 }) {
   return (
     <Link
-      className="w-full min-h-[60px] h-fit dark:bg-gray-700 bg-gray-50 flex items-center p-[10px] rounded-[5px]"
+      className="w-full md:w-[250px] lg:w-[250px] 2xl:w-[300px]  xl:w-[250px] border-2 border-solid border-[#f8f8f8] text-gray-600   h-[200px] dark:border-none hover:border-[#f2f2f2]  dark:bg-gray-700 dark:hover:bg-[#2e3441] bg-gray-50 flex justify-between p-[10px] rounded-[5px]"
       to={`/houses/${id}`}
     >
       <div>
-        <span className="font-bold dark:text-white">Address: </span>
-        {address}
+        <span className="font-bold dark:text-gray-400 ">Address: </span>
+        <span className="dark:text-gray-100">{address}</span>
       </div>
     </Link>
   );

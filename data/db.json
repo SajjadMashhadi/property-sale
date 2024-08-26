@@ -23,16 +23,6 @@
   ],
   "houses": [
     {
-      "address": "Yellow Zone, Deal Porters Way, Surrey Quays, Rotherhithe, London Borough of Southwark, London, Greater London, England, SE16 2UF, United Kingdom",
-      "description": "some where",
-      "phone": "412432",
-      "position": {
-        "lat": 51.49406011078824,
-        "lng": -0.04772186279296876
-      },
-      "id": 10
-    },
-    {
       "address": "Bupa Health Centre, Basinghall Street, Cheap, City of London, Greater London, England, EC2V 5AG, United Kingdom",
       "description": "fsadfsdaf",
       "phone": "4321432",
@@ -74,26 +64,6 @@
       "id": 14
     },
     {
-      "address": "Vital Ingredient, Cullum Street, Cornhill, City of London, Greater London, England, EC3M 7JJ, United Kingdom",
-      "description": "okokok",
-      "phone": "978978",
-      "position": {
-        "lat": 51.51190484980004,
-        "lng": -0.08222579956054689
-      },
-      "id": 18
-    },
-    {
-      "address": "Eastwell House, Manciple Street, Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 4AP, United Kingdom",
-      "description": "dsafsdf",
-      "phone": "4312412",
-      "position": {
-        "lat": 51.49844180169361,
-        "lng": -0.0872039794921875
-      },
-      "id": 19
-    },
-    {
       "address": "Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 2AP, United Kingdom",
       "description": "fdasf",
       "phone": "4312421",
@@ -102,6 +72,16 @@
         "lng": -0.08022729685314367
       },
       "id": 20
+    },
+    {
+      "address": "Dockside Vaults, East Smithfield, Wapping, London Borough of Tower Hamlets, London, Greater London, England, E1W 1AT, United Kingdom",
+      "description": "fsafsdf",
+      "phone": "544325432",
+      "position": {
+        "lat": 51.50767403407928,
+        "lng": -0.07123947143554689
+      },
+      "id": 21
     }
   ]
 }
