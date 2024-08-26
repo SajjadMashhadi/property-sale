@@ -73,6 +73,20 @@ export const useHouse = (id: string): UseFetchResult => {
   return { data, isPending, error };
 };
 
+//get the address from location (lat,lng)
+export const getAddress = (lat: number, lng: number) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+      )
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => reject(error));
+  });
+};
+
 //add house
 export const addHouse = (body) => {
   return new Promise((resolve, reject) => {

@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Button from "./button";
 import Input from "./input";
 import clsx from "clsx";
@@ -11,7 +11,7 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
-import { addHouse, editHouse } from "../api/useFetch";
+import { addHouse, editHouse, getAddress } from "../api/useFetch";
 
 interface house {
   address: string;
@@ -29,21 +29,6 @@ export default function AddHouse({
   house?: house;
   handleClose?: () => void;
 }) {
-  const navigateTo = useNavigate();
-
-  //set the location of the marker by clicking on the map
-  const LocationFinderDummy = () => {
-    const map = useMapEvents({
-      click(e) {
-        setFormData((formData) => ({
-          ...formData,
-          position: { lat: e.latlng.lat, lng: e.latlng.lng },
-        }));
-      },
-    });
-    return null;
-  };
-
   const [formData, setFormData] = useState<house>(
     house
       ? house
@@ -55,22 +40,34 @@ export default function AddHouse({
         }
   );
 
-  //set the location by dragging the marker
-  const markerRef = useRef(null);
-  const eventHandlers = useMemo(
-    () => ({
-      dragend() {
-        const marker = markerRef.current;
-        if (marker != null) {
-          setFormData((formData) => ({
-            ...formData,
-            position: marker.getLatLng(),
-          }));
-        }
+  const navigateTo = useNavigate();
+
+  //get the address from location (lat,lng)
+  const setAddress = (lat: number, lng: number) => {
+    getAddress(lat, lng)
+      .then((res) => {
+        // const address = res.data.display_name;
+        setFormData((formData) => ({
+          ...formData,
+          address: res.data.display_name,
+        }));
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //set the location of the marker by clicking on the map
+  const LocationFinderDummy = () => {
+    const map = useMapEvents({
+      click(e) {
+        setAddress(e.latlng.lat, e.latlng.lng);
+        setFormData((formData) => ({
+          ...formData,
+          position: { lat: e.latlng.lat, lng: e.latlng.lng },
+        }));
       },
-    }),
-    []
-  );
+    });
+    return null;
+  };
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -138,16 +135,7 @@ export default function AddHouse({
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker
-              draggable={true}
-              eventHandlers={eventHandlers}
-              position={formData.position}
-              ref={markerRef}
-            >
-              <Popup>
-                <span>drag the marker</span>
-              </Popup>
-            </Marker>
+            <Marker draggable={false} position={formData.position}></Marker>
             <LocationFinderDummy />
           </MapContainer>
           {house ? (

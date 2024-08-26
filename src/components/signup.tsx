@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./button";
 import { login, signup } from "../api/useFetch";
 import { useNavigate, Link } from "react-router-dom";
@@ -15,16 +15,19 @@ export default function Signup({ registerType }: { registerType: string }) {
     email: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     //login
     if (registerType === "login") {
       login(formData)
-        .then((res) => {
+        .then(() => {
           navigateTo("/");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setErrorMessage(err.response.data);
+        });
     } else {
       //signup
       signup(formData)
@@ -32,7 +35,9 @@ export default function Signup({ registerType }: { registerType: string }) {
           navigateTo("/");
           console.log(res);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setErrorMessage(err.response.data);
+        });
     }
   }
 
@@ -40,10 +45,23 @@ export default function Signup({ registerType }: { registerType: string }) {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   }
 
+  useEffect(() => {
+    setErrorMessage(null);
+    setFormData({
+      email: "",
+      password: "",
+    });
+  }, [registerType]);
+
   return (
     <div className="w-full h-screen flex flex-col justify-center justify-items-center items-center dark:bg-gray-700">
       <div className=" 0 w-[400px] sm:w-[500px] md:w-[700px] flex flex-col gap-[50px] bg-gray-50 p-[40px] border-none rounded-[5px]">
         <h1 className="text-4xl  font-bold text-center">{registerType}</h1>
+
+        <div className="text-red-600 text-[12px] leading-[0] text-center">
+          {errorMessage ? errorMessage + "!" : ""}
+        </div>
+
         <form
           className="flex flex-col gap-[30px]"
           onSubmit={(e) => handleSubmit(e)}
