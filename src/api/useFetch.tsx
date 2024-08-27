@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useLocalStorage } from "usehooks-ts";
+import { deleteMethod, get, post, put } from "./axios";
+import { useAuth } from "../auth/auth";
 
 interface UserRegister {
   email: string;
@@ -30,25 +32,6 @@ interface House {
   userId: number;
 }
 
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer `,
-  },
-});
-
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
 //fetch houses
 export const useHouses = (
   page: number,
@@ -64,14 +47,11 @@ export const useHouses = (
 
   useEffect(() => {
     if (userHouses) {
-      api
-        .get(`/640/houses`, {
-          params: {
-            _page: page,
-            _limit: limit,
-            userId,
-          },
-        })
+      get("/640/houses", {
+        _page: page,
+        _limit: limit,
+        userId,
+      })
         .then((res) => {
           setData(res.data);
           setError(null);
@@ -87,14 +67,10 @@ export const useHouses = (
         })
         .finally(() => setIsPending(false));
     } else {
-      api
-
-        .get(`/houses`, {
-          params: {
-            _page: page,
-            _limit: limit,
-          },
-        })
+      get("/houses", {
+        _page: page,
+        _limit: limit,
+      })
         .then((res) => {
           setData(res.data);
           setError(null);
@@ -118,8 +94,7 @@ export const useHouse = (id: string): UseFetchHouseResult => {
   const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
-    api
-      .get(`/600/houses/${id}`)
+    get(`/houses/${id}`)
       .then((res) => {
         setData(res.data);
         setError(null);
@@ -154,48 +129,22 @@ export const getAddress = (
 
 //add house
 export const addHouse = (body: House) => {
-  return new Promise((resolve, reject) => {
-    api
-      .post("/600/houses", body)
-      .then((response) => {
-        resolve(response);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+  return post("/600/houses", body);
 };
 
 //edit house
 export const editHouse = (id: string, body: House) => {
-  return new Promise((resolve, reject) => {
-    api
-      .put(`/600/houses/${id}`, body)
-      .then((response) => {
-        resolve(response);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+  return put(`/600/houses/${id}`, body);
 };
 
 //delete house
 export const deleteHouse = (id: string) => {
-  return new Promise((resolve, reject) => {
-    api
-      .delete(`/600/houses/${id}`)
-      .then((response) => {
-        resolve(response);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+  return deleteMethod(`/600/houses/${id}`);
 };
 
 //logout
 export const logout = () => {
+  console.log("logging out");
   localStorage.removeItem("token");
   localStorage.removeItem("userId");
 };
@@ -203,16 +152,12 @@ export const logout = () => {
 //login
 export const login = (body: UserRegister) => {
   return new Promise((resolve, reject) => {
-    api
-      .post("/login", body)
+    post("/login", body)
       .then((response) => {
-        console.log(response.data.accessToken);
-        api.defaults.headers.common = {
-          Authorization: `Bearer ${response.data.accessToken}`,
-        };
         resolve(response);
       })
       .catch((error) => {
+        console.log(error);
         reject(error);
       });
   });
@@ -220,14 +165,5 @@ export const login = (body: UserRegister) => {
 
 //signup
 export const signup = (body: UserRegister) => {
-  return new Promise((resolve, reject) => {
-    api
-      .post("/users", body)
-      .then((response) => {
-        resolve(response);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+  return post("/users", body);
 };

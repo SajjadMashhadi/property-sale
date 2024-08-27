@@ -34,20 +34,24 @@
       "email": "dfadsf@rererw.ghf",
       "password": "$2a$10$vI.i4pKC2fyMiPrwj62QQuX1FEtYbrwLH1nc0rC4y8e4roAdEN4cK",
       "id": 7
+    },
+    {
+      "email": "nbx@mnm.dfsf",
+      "password": "$2a$10$PBwFD3dcXCMy7GNCegHQYu8wxM3RBnTREC/RndpvXydhixozJdFhe",
+      "id": 8
+    },
+    {
+      "email": "cxbxc@rfesar.kj",
+      "password": "$2a$10$T11YNi6gl90ETWeX5hv26ez4vO4KHtIjhZ5pihDbUv0pngoXdXEL6",
+      "id": 9
+    },
+    {
+      "email": "dsfasfs@bvxbvc.hjkhjk",
+      "password": "$2a$10$lvWbZTvrlo8WbJPmE7WOeOvG0ZJfJSw4aSSWzlCGFZLiZxIT3pOVe",
+      "id": 10
     }
   ],
   "houses": [
-    {
-      "userId": 1,
-      "address": "Cumberland Street, Pimlico, London, Greater London, England, SW1V 4RN, United Kingdom",
-      "description": "zczvcv",
-      "phone": "43243214",
-      "position": {
-        "lat": 51.488074681670675,
-        "lng": -0.14344024762976917
-      },
-      "id": 1
-    },
     {
       "userId": 4,
       "address": "59, Webber Street, Elephant and Castle, London Borough of Southwark, London, Greater London, England, SE1 0RJ, United Kingdom",
@@ -114,28 +118,6 @@
       "id": 7
     },
     {
-      "address": "14, Melior Street, Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 3QQ, United Kingdom",
-      "description": "fdsafsdaf",
-      "phone": "134124",
-      "position": {
-        "lat": 51.50297266764028,
-        "lng": -0.08497238159179688
-      },
-      "userId": 1,
-      "id": 8
-    },
-    {
-      "address": "Sarsons Vinegar Factory, Roper Lane, Bermondsey Village, Old Kent Road, London Borough of Southwark, London, Greater London, England, SE1 2EH, United Kingdom",
-      "description": "safsdafs",
-      "phone": "1412423",
-      "position": {
-        "lat": 51.50062180251775,
-        "lng": -0.07930755615234376
-      },
-      "userId": 1,
-      "id": 9
-    },
-    {
       "address": "Great Dover Street Apartments, 165, Great Dover Street, Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 4XA, United Kingdom",
       "description": "fdsaf",
       "phone": "412124",
@@ -145,6 +127,61 @@
       },
       "userId": 1,
       "id": 10
+    },
+    {
+      "address": "Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 2AP, United Kingdom",
+      "description": "fsafsf",
+      "phone": "242314",
+      "position": {
+        "lat": 51.506242306320296,
+        "lng": -0.07879257202148439
+      },
+      "userId": 1,
+      "id": 11
+    },
+    {
+      "address": "Petite Route du Ryveld, Steenvoorde, Dunkirk, Norte, Hauts-de-France, Metropolitan France, 59114, France",
+      "description": "fdsaf",
+      "phone": "4324",
+      "position": {
+        "lat": 50.81495951537223,
+        "lng": 2.5433349609375004
+      },
+      "userId": 1,
+      "id": 13
+    },
+    {
+      "address": "Greene House, Burge Street, Bermondsey Village, Walworth, London Borough of Southwark, London, Greater London, England, SE1 4ER, United Kingdom",
+      "description": "vxvx",
+      "phone": "5435",
+      "position": {
+        "lat": 51.49630444411563,
+        "lng": -0.08926391601562501
+      },
+      "userId": 1,
+      "id": 14
+    },
+    {
+      "address": "London South Bank University, Milcote Street, Elephant and Castle, London Borough of Southwark, London, Greater London, England, SE1 0AA, United Kingdom",
+      "description": "fdsfasf",
+      "phone": "342144324",
+      "position": {
+        "lat": 51.498484547170605,
+        "lng": -0.10058714480241317
+      },
+      "userId": 10,
+      "id": 15
+    },
+    {
+      "address": "London South Bank University, Southwark Bridge Road, Elephant and Castle, London Borough of Southwark, London, Greater London, England, SE1 6NP, United Kingdom",
+      "description": "fsfdsafds",
+      "phone": "4143214",
+      "position": {
+        "lat": 51.49762961696847,
+        "lng": -0.10076522827148439
+      },
+      "userId": 1,
+      "id": 16
     }
   ]
 }

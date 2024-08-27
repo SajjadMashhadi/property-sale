@@ -3,7 +3,7 @@ import Button from "./button";
 import Modal from "react-modal";
 import { useState } from "react";
 import clsx from "clsx";
-import { logout as logoutFunc } from "../api/useFetch";
+import { useAuth } from "../auth/auth";
 
 const customStyles = {
   content: {
@@ -24,9 +24,11 @@ export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const navigateTo = useNavigate();
 
+  const { logout } = useAuth();
+
   //log out
-  const logout = () => {
-    logoutFunc();
+  const moveToLoginPage = () => {
+    logout();
     navigateTo("/login");
   };
   return (
@@ -114,7 +116,7 @@ export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
             <Button
               text="login"
               onClick={() => {
-                logout();
+                moveToLoginPage();
               }}
             />
           </div>
@@ -131,14 +133,15 @@ export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
           <p>Do you want to remove this item?</p>
           <div className="flex flex-row justify-start gap-[20px]">
             <Button text="no" onClick={() => setShowModal(false)} />
-            <Button text="yes" onClick={() => logout()} />
+            <Button text="yes" onClick={() => moveToLoginPage()} />
           </div>
         </div>
       </Modal>
       <div
         onClick={() => setShowSidebar(false)}
         className={clsx("lg:none", {
-          "w-full min-h-screen absolute z-[500]  ": showSidebar,
+          "w-full min-h-screen absolute z-[500] dark:bg-[rgb(31_31_31_/_82%)]  bg-[rgb(0_0_0_/_42%)] ":
+            showSidebar,
           none: !showSidebar,
         })}
       ></div>

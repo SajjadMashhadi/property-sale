@@ -1,10 +1,11 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import HouseCard from "./houseCard";
 import EmptyPage from "./emptyPage";
 import Button from "./button";
 import { useHouses } from "../api/useFetch";
+import { useLocation } from "react-router-dom";
 
+//number items in each page
 const limit = 6;
 
 export default function Houses({ userHouses }: { userHouses: boolean }) {
@@ -17,6 +18,9 @@ export default function Houses({ userHouses }: { userHouses: boolean }) {
     error,
   } = useHouses(page, limit, userHouses);
 
+  const location = useLocation();
+
+  //calculate the total pages of items
   const totalPages = dataLength ? Math.ceil(dataLength / limit) : 1;
 
   const handleNextPage = () => {
@@ -29,6 +33,10 @@ export default function Houses({ userHouses }: { userHouses: boolean }) {
       setPage((page) => page - 1);
     }
   };
+
+  useEffect(() => {
+    setPage(1);
+  }, [location.pathname]);
 
   if (error) {
     return <EmptyPage text="Error! Please try again later." />;

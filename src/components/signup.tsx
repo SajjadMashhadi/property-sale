@@ -3,7 +3,7 @@ import Button from "./button";
 import { login, signup } from "../api/useFetch";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "./input";
-import { useLocalStorage } from "usehooks-ts";
+import { useAuth } from "../auth/auth";
 
 interface user {
   email: string;
@@ -18,8 +18,7 @@ export default function Signup({ registerType }: { registerType: string }) {
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const [, setToken] = useLocalStorage("token", null);
-  const [, setUserId] = useLocalStorage("userId", null);
+  const { login: register } = useAuth();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,21 +26,20 @@ export default function Signup({ registerType }: { registerType: string }) {
     if (registerType === "login") {
       login(formData)
         .then((res) => {
-          setToken(res.data.accessToken);
-          setUserId(res.data.user.id);
+          console.log(res);
+          register(res.data.accessToken, res.data.user.id);
           navigateTo("/app");
         })
         .catch((err) => {
+          console.log(err);
           setErrorMessage(err.response.data);
         });
     } else {
       //signup
       signup(formData)
         .then((res) => {
-          setToken(res.data.accessToken);
-          setUserId(res.data.user.id);
+          register(res.data.accessToken, res.data.user.id);
           navigateTo("/app/Houses");
-          console.log(res);
         })
         .catch((err) => {
           setErrorMessage(err.response.data);
@@ -67,7 +65,9 @@ export default function Signup({ registerType }: { registerType: string }) {
         <h1 className="text-4xl  font-bold text-center capitalize">
           {registerType}
         </h1>
-
+        {/* <p>
+          <Link to="/">back to main page</Link>
+        </p> */}
         <div className="text-red-600 text-[12px] leading-[0] text-center">
           {errorMessage ? errorMessage + "!" : ""}
         </div>

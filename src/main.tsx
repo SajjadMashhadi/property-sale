@@ -14,6 +14,7 @@ import AddHouse from "./components/addHouse.tsx";
 import ProtectedRoute from "./components/protectedRoute.tsx";
 import ThemeSwitch from "./components/themeSwitch.tsx";
 import AuthProvider from "./auth/provider.tsx";
+import Interceptor from "./api/interceptor.tsx";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
 
       {
         path: "/houses/:id",
-        element: <House />,
+        element: <House editable={false} />,
+      },
+      {
+        path: "*",
+        element: <Navigate to="/houses" />,
       },
     ],
   },
@@ -61,7 +66,15 @@ const router = createBrowserRouter([
           },
           {
             path: "/app/houses/:id",
-            element: <House />,
+            element: <House editable={false} />,
+          },
+          {
+            path: "/app/myHouses/:id",
+            element: <House editable={true} />,
+          },
+          {
+            path: "*",
+            element: <Navigate to="/app/houses" />,
           },
         ],
       },
@@ -80,8 +93,10 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
-      <ThemeSwitch />
-      <RouterProvider router={router} />
+      <Interceptor>
+        <ThemeSwitch />
+        <RouterProvider router={router} />
+      </Interceptor>
     </AuthProvider>
   </StrictMode>
 );

@@ -5,9 +5,10 @@ import EmptyPage from "./emptyPage";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import Button from "./button";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddHouse from "./addHouse";
+import AuthContext from "../auth/context";
 
 const customStyles = {
   content: {
@@ -22,19 +23,20 @@ const customStyles = {
   },
 };
 
-export default function House() {
+export default function House({ editable }: { editable: boolean }) {
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [editModal, setEditModal] = useState<boolean>(false);
 
   const { id } = useParams();
   const navigateTo = useNavigate();
 
+  const { isAuthenticated } = useContext(AuthContext);
   const { data: house, error, isPending } = useHouse(id);
 
   const handleDelete = () => {
     if (id) {
       deleteHouse(id)
-        .then(() => navigateTo("/"))
+        .then(() => navigateTo("/app/myHouses"))
         .catch((err) => console.log(err));
     }
   };
@@ -69,10 +71,12 @@ export default function House() {
             />
             <Marker draggable={false} position={house.position}></Marker>
           </MapContainer>
-          <div className="flex flex-col sm:flex-row justify-start gap-[20px]">
-            <Button text="edit" onClick={() => setEditModal(true)} />
-            <Button onClick={() => setDeleteModal(true)} text="remove" />
-          </div>
+          {isAuthenticated && editable && (
+            <div className="flex flex-col sm:flex-row justify-start gap-[20px]">
+              <Button text="edit" onClick={() => setEditModal(true)} />
+              <Button onClick={() => setDeleteModal(true)} text="remove" />
+            </div>
+          )}
           <Modal
             ariaHideApp={false}
             isOpen={deleteModal}
