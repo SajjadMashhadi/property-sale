@@ -20,7 +20,7 @@ const ThemeSwitch: FC = () => {
         text={`${theme === "light" ? "dark" : "light"} mode`}
         onClick={handleToggle}
       >
-        <img className="w-[20px]" src="../public/moon.svg" />
+        <img className="w-[20px]" src="/moon.svg" />
       </Button>
     </div>
   );

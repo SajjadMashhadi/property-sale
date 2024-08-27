@@ -10,7 +10,11 @@ interface user {
   password: string;
 }
 
-export default function Signup({ registerType }: { registerType: string }) {
+interface SignupProps {
+  registerType: string;
+}
+
+const Signup: React.FC<SignupProps> = ({ registerType }) => {
   const navigateTo = useNavigate();
   const [formData, setFormData] = useState<user>({
     email: "",
@@ -104,13 +108,10 @@ export default function Signup({ registerType }: { registerType: string }) {
 
           <Link to="/">
             <p className=" text-center text-xs flex justify-center gap-[5px] ">
-              <img
-                className="w-[10px] dark:hidden"
-                src="../public/home-light.svg"
-              />
+              <img className="w-[10px] dark:hidden" src="/home-light.svg" />
               <img
                 className="w-[10px] hidden dark:inline-block"
-                src="../public/home-dark.svg"
+                src="/home-dark.svg"
               />{" "}
               back to main page{" "}
             </p>
@@ -119,4 +120,6 @@ export default function Signup({ registerType }: { registerType: string }) {
       </div>
     </div>
   );
-}
+};
+
+export default Signup;

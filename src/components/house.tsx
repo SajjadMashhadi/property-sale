@@ -23,7 +23,11 @@ const customStyles = {
   },
 };
 
-export default function House({ editable }: { editable: boolean }) {
+interface HouseProps {
+  editable: boolean;
+}
+
+const House: React.FC<HouseProps> = ({ editable }: { editable: boolean }) => {
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [editModal, setEditModal] = useState<boolean>(false);
 
@@ -105,4 +109,6 @@ export default function House({ editable }: { editable: boolean }) {
       </div>
     );
   }
-}
+};
+
+export default House;

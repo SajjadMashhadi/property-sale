@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import HouseCard from "./houseCard";
 import EmptyPage from "../ui/emptyPage";
 import Button from "../ui/button";
@@ -8,7 +8,11 @@ import { useLocation } from "react-router-dom";
 //number items in each page
 const limit = 6;
 
-export default function Houses({ userHouses }: { userHouses: boolean }) {
+interface HousesProps {
+  userHouses: boolean;
+}
+
+const Houses: FC<HousesProps> = ({ userHouses }) => {
   const [page, setPage] = useState<number>(1);
 
   const {
@@ -21,16 +25,17 @@ export default function Houses({ userHouses }: { userHouses: boolean }) {
   const location = useLocation();
 
   //calculate the total pages of items
-  const totalPages = dataLength ? Math.ceil(dataLength / limit) : 1;
+  const totalPages: number = dataLength ? Math.ceil(dataLength / limit) : 1;
 
-  const handleNextPage = () => {
+  const handleNextPage = (): void => {
     if (page < totalPages) {
-      setPage((page) => page + 1);
+      setPage((page: number) => page + 1);
     }
   };
-  const handlePreviousPage = () => {
+
+  const handlePreviousPage = (): void => {
     if (page > 1) {
-      setPage((page) => page - 1);
+      setPage((page: number) => page - 1);
     }
   };
 
@@ -73,4 +78,6 @@ export default function Houses({ userHouses }: { userHouses: boolean }) {
       </div>
     );
   }
-}
+};
+
+export default Houses;

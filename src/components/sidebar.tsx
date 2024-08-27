@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../ui/button";
 import Modal from "react-modal";
-import { useState } from "react";
+import { FC, useState } from "react";
 import clsx from "clsx";
 import { useAuth } from "../auth/auth";
 
@@ -18,7 +18,11 @@ const customStyles = {
   },
 };
 
-export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
+interface SidebarProps {
+  loggedIn: boolean;
+}
+
+const Sidebar: FC<SidebarProps> = ({ loggedIn }) => {
   //state for toggling side bar menu in mobile screens
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -27,7 +31,7 @@ export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
   const { logout } = useAuth();
 
   //log out
-  const moveToLoginPage = () => {
+  const moveToLoginPage = (): void => {
     logout();
     navigateTo("/login");
   };
@@ -37,7 +41,7 @@ export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
         onClick={() => setShowSidebar(true)}
         className="block lg:hidden absolute left-[20px] top-[20px]"
       >
-        <img className="w-[40px]" src="../public/menu.svg" />
+        <img className="w-[40px]" src="/menu.svg" />
       </button>
       <div
         className={clsx(
@@ -147,4 +151,6 @@ export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
       ></div>
     </>
   );
-}
+};
+
+export default Sidebar;

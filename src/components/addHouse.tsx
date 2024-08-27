@@ -8,15 +8,13 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { addHouse, editHouse, getAddress } from "../api/useFetch";
 import { House, HouseForm } from "../utils/types";
 
-//a component for both add and edit house
-export default function AddHouse({
-  house,
-  handleClose,
-}: {
+interface AddHouseProps {
   house?: House;
   handleClose?: () => void;
-}) {
-  const [userId] = useLocalStorage("userId", undefined);
+}
+
+const AddHouse: React.FC<AddHouseProps> = ({ house, handleClose }) => {
+  const [userId] = useLocalStorage<string | undefined>("userId", undefined);
 
   const [formData, setFormData] = useState<HouseForm>(
     house
@@ -33,7 +31,6 @@ export default function AddHouse({
 
   const navigateTo = useNavigate();
 
-  //get the address from location (lat,lng)
   const setAddress = (lat: number, lng: number): void => {
     getAddress(lat, lng)
       .then((res) => {
@@ -45,8 +42,7 @@ export default function AddHouse({
       .catch((err) => console.log(err));
   };
 
-  //set the location of the marker by clicking on the map
-  const LocationFinderDummy = () => {
+  const LocationFinderDummy: React.FC = () => {
     const map = useMapEvents({
       click(e) {
         setAddress(e.latlng.lat, e.latlng.lng);
@@ -59,7 +55,7 @@ export default function AddHouse({
     return null;
   };
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (!formData.address || !formData.description || !formData.phone) {
       setErrorMessage("Please fill all the inputs");
@@ -74,11 +70,11 @@ export default function AddHouse({
           .catch((err) => console.log(err));
       }
     }
-  }
+  };
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
-  }
+  };
 
   return (
     <div
@@ -99,7 +95,7 @@ export default function AddHouse({
         </div>
         <form
           className="flex flex-col gap-[10px] sm:gap-[20px] md:gap-[30px] items-center py-[10px] sm:p-[10px]"
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit}
         >
           <Input
             type="text"
@@ -137,7 +133,7 @@ export default function AddHouse({
           </MapContainer>
           {house && handleClose ? (
             <div className=" w-full flex flex-col sm:flex-row justify-start gap-[20px]">
-              <Button text="close" onClick={() => handleClose()} />
+              <Button text="close" onClick={handleClose} />
               <Button text="edit" />
             </div>
           ) : (
@@ -147,4 +143,6 @@ export default function AddHouse({
       </div>
     </div>
   );
-}
+};
+
+export default AddHouse;

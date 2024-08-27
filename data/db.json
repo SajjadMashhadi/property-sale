@@ -54,6 +54,11 @@
       "email": "trtwrewe@gfdg.hkhjkh",
       "password": "$2a$10$MgG.onMxMQicHov9m9PfPOtGSAMKaa8H6vPd9agMlhRAv9hr1kxEm",
       "id": 11
+    },
+    {
+      "email": "fasfs@fdsf",
+      "password": "$2a$10$5RsuxokvqI7vck3gINkcee8HXNOjUhXhrBwIPyxMUZSLh4yvEhqVq",
+      "id": 12
     }
   ],
   "houses": [
@@ -134,17 +139,6 @@
       "id": 15
     },
     {
-      "address": "St Thomas' Hospital, Westminster Bridge Road, Waterloo, London Borough of Lambeth, London, Greater London, England, SE1 7EH, United Kingdom",
-      "description": "fsfdsafds",
-      "phone": "4143214",
-      "position": {
-        "lat": 51.498548666941566,
-        "lng": -0.12035274007743403
-      },
-      "userId": 1,
-      "id": 16
-    },
-    {
       "address": "Lesotho High Commission, 7, Chesham Place, Belgravia, London, Greater London, England, SW1X 8HN, United Kingdom",
       "description": "fasfadsf",
       "phone": "4124",
@@ -154,17 +148,6 @@
       },
       "userId": 1,
       "id": 17
-    },
-    {
-      "address": "St Botolph Building, 138, Houndsditch, Aldgate, City of London, Greater London, England, EC3A 7DH, United Kingdom",
-      "description": "fsafsadf",
-      "phone": "341234",
-      "position": {
-        "lat": 51.51440469156115,
-        "lng": -0.07707595825195314
-      },
-      "userId": 1,
-      "id": 18
     },
     {
       "address": "Gloucester Court, Swan Street, The Borough, London Borough of Southwark, London, Greater London, England, SE1 1DQ, United Kingdom",
@@ -187,6 +170,28 @@
       },
       "userId": 11,
       "id": 19
+    },
+    {
+      "address": "Lambeth Pier, Lambeth Palace Road, Kennington Cross, Lambeth, London Borough of Lambeth, London, Greater London, England, SE1 7SG, United Kingdom",
+      "description": "fasdf",
+      "phone": "3241",
+      "position": {
+        "lat": 51.49662505414181,
+        "lng": -0.12258410644083506
+      },
+      "userId": 1,
+      "id": 20
+    },
+    {
+      "address": "11, Whites Grounds, Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 3LB, United Kingdom",
+      "description": "zxcZC",
+      "phone": "1234",
+      "position": {
+        "lat": 51.501690392607,
+        "lng": -0.08001408876829653
+      },
+      "userId": 1,
+      "id": 21
     }
   ]
 }
