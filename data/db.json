@@ -182,6 +182,17 @@
       },
       "userId": 1,
       "id": 16
+    },
+    {
+      "address": "Lesotho High Commission, 7, Chesham Place, Belgravia, London, Greater London, England, SW1X 8HN, United Kingdom",
+      "description": "fasfadsf",
+      "phone": "4124",
+      "position": {
+        "lat": 51.4978433510224,
+        "lng": -0.1554908565653901
+      },
+      "userId": 1,
+      "id": 17
     }
   ]
 }

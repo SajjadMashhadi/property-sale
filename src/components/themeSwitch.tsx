@@ -15,11 +15,13 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <div className="absolute top-[20px] right-[40px]">
+    <div className="absolute top-[20px] right-[10px] md:right-[40px]">
       <Button
         text={`${theme === "light" ? "dark" : "light"} mode`}
         onClick={handleToggle}
-      />
+      >
+        <img className="w-[20px]" src="../public/moon.svg" />
+      </Button>
     </div>
   );
 }

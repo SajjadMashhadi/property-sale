@@ -65,9 +65,7 @@ export default function Signup({ registerType }: { registerType: string }) {
         <h1 className="text-4xl  font-bold text-center capitalize">
           {registerType}
         </h1>
-        {/* <p>
-          <Link to="/">back to main page</Link>
-        </p> */}
+
         <div className="text-red-600 text-[12px] leading-[0] text-center">
           {errorMessage ? errorMessage + "!" : ""}
         </div>
@@ -104,6 +102,20 @@ export default function Signup({ registerType }: { registerType: string }) {
               here
             </Link>
           </div>
+
+          <Link to="/">
+            <p className=" text-center text-xs flex justify-center gap-[5px] ">
+              <img
+                className="w-[10px] dark:hidden"
+                src="../public/home-light.svg"
+              />
+              <img
+                className="w-[10px] hidden dark:inline-block"
+                src="../public/home-dark.svg"
+              />{" "}
+              back to main page{" "}
+            </p>
+          </Link>
         </form>
       </div>
     </div>

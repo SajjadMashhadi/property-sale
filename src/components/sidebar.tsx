@@ -37,7 +37,7 @@ export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
         onClick={() => setShowSidebar(true)}
         className="block lg:hidden absolute left-[20px] top-[20px]"
       >
-        show menu
+        <img className="w-[40px]" src="../public/menu.svg" />
       </button>
       <div
         className={clsx(
