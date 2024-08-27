@@ -1,14 +1,13 @@
-export default function Input({
-  type,
-  value,
-  label,
-  handleChange,
-}: {
+import React, { FC } from "react";
+
+interface InputProps {
   type: string;
   value: string | number | undefined;
   label: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) {
+}
+
+const Input: FC<InputProps> = ({ type, value, label, handleChange }) => {
   return (
     <div className="w-full flex flex-col sm:flex-row justify-between sm:items-center ">
       <label htmlFor={label}>{label}: </label>
@@ -22,4 +21,6 @@ export default function Input({
       />
     </div>
   );
-}
+};
+
+export default Input;

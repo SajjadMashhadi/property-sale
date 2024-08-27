@@ -1,8 +1,12 @@
 import AuthContext from "./context";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, FC } from "react";
 
-const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
 
   return (
     <AuthContext.Provider

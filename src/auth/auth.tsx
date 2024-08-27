@@ -5,12 +5,8 @@ import { useLocalStorage } from "usehooks-ts";
 export const useAuth = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
-  const [token, setToken] = useLocalStorage("token");
-  const [userId, setUserId] = useLocalStorage("userId");
-
-  //   axios.defaults.headers.common["token"] = token;
-
-  //   delete axios.defaults.headers.common["token"];
+  const [token, setToken] = useLocalStorage("token", null);
+  const [userId, setUserId] = useLocalStorage("userId", null);
 
   function login(token: string, userId: string) {
     setToken(token);

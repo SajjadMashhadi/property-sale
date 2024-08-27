@@ -123,28 +123,6 @@
       "id": 7
     },
     {
-      "address": "South Carriage Drive, Belgravia, London, Greater London, England, SW1X 7NL, United Kingdom",
-      "description": "fdsaf",
-      "phone": "412124",
-      "position": {
-        "lat": 51.503250489794105,
-        "lng": -0.15466690063476565
-      },
-      "userId": 1,
-      "id": 10
-    },
-    {
-      "address": "Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 2AP, United Kingdom",
-      "description": "fsafsf",
-      "phone": "242314",
-      "position": {
-        "lat": 51.506242306320296,
-        "lng": -0.07879257202148439
-      },
-      "userId": 1,
-      "id": 11
-    },
-    {
       "address": "London South Bank University, Milcote Street, Elephant and Castle, London Borough of Southwark, London, Greater London, England, SE1 0AA, United Kingdom",
       "description": "fdsfasf",
       "phone": "342144324",
@@ -156,12 +134,12 @@
       "id": 15
     },
     {
-      "address": "London South Bank University, Southwark Bridge Road, Elephant and Castle, London Borough of Southwark, London, Greater London, England, SE1 6NP, United Kingdom",
+      "address": "St Thomas' Hospital, Westminster Bridge Road, Waterloo, London Borough of Lambeth, London, Greater London, England, SE1 7EH, United Kingdom",
       "description": "fsfdsafds",
       "phone": "4143214",
       "position": {
-        "lat": 51.49762961696847,
-        "lng": -0.10076522827148439
+        "lat": 51.498548666941566,
+        "lng": -0.12035274007743403
       },
       "userId": 1,
       "id": 16

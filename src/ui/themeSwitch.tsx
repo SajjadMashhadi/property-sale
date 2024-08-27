@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import Button from "./button";
 
-export default function ThemeSwitch() {
-  const [theme, setTheme] = useLocalStorage("theme", "dark");
+const ThemeSwitch: FC = () => {
+  const [theme, setTheme] = useLocalStorage<string>("theme", "dark");
 
   useEffect(() => {
     document.body.classList.remove("light", "dark");
     document.body.classList.add(theme);
   }, [theme]);
 
-  const handleToggle = () => {
+  const handleToggle = (): void => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
@@ -24,4 +24,6 @@ export default function ThemeSwitch() {
       </Button>
     </div>
   );
-}
+};
+
+export default ThemeSwitch;

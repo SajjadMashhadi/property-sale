@@ -1,12 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
+import { FC } from "react";
 
-export default function HouseCard({
-  address,
-  id,
-}: {
+interface HouseCardProps {
   address: string;
   id: number;
-}) {
+}
+
+const HouseCard: FC<HouseCardProps> = ({ address, id }) => {
   const location = useLocation();
   return (
     <Link
@@ -19,4 +19,6 @@ export default function HouseCard({
       </div>
     </Link>
   );
-}
+};
+
+export default HouseCard;

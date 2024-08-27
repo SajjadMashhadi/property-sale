@@ -1,14 +1,12 @@
-import { ReactNode } from "react";
+import { ReactNode, FC } from "react";
 
-export default function Button({
-  children,
-  text,
-  onClick,
-}: {
+interface ButtonProps {
   text: string;
   onClick?: () => void;
   children?: ReactNode;
-}) {
+}
+
+const Button: FC<ButtonProps> = ({ children, text, onClick }) => {
   return (
     <button
       onClick={onClick ? () => onClick() : undefined}
@@ -18,4 +16,6 @@ export default function Button({
       {children} {text}
     </button>
   );
-}
+};
+
+export default Button;

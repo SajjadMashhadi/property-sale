@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { api } from "./axios";
 import { useAuth } from "../auth/auth";
 
-const Interceptor = ({ children }) => {
+const Interceptor = ({ children }: { children: ReactNode }) => {
   const { logout } = useAuth();
 
   useEffect(() => {
