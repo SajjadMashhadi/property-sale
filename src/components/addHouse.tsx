@@ -4,7 +4,6 @@ import Input from "./input";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "usehooks-ts";
-
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { addHouse, editHouse, getAddress } from "../api/useFetch";
 
@@ -37,15 +36,15 @@ export default function AddHouse({
           position: { lat: 51.505, lng: -0.09 },
         }
   );
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigateTo = useNavigate();
 
   //get the address from location (lat,lng)
-  const setAddress = (lat: number, lng: number) => {
+  const setAddress = (lat: number, lng: number): void => {
     getAddress(lat, lng)
       .then((res) => {
-        // const address = res.data.display_name;
         setFormData((formData) => ({
           ...formData,
           address: res.data.display_name,
@@ -75,11 +74,11 @@ export default function AddHouse({
     } else {
       if (house) {
         editHouse(house.id, formData)
-          .then(() => navigateTo("/"))
+          .then(() => navigateTo("/app/myHouses"))
           .catch((err) => console.log(err));
       } else {
         addHouse({ ...formData, userId })
-          .then(() => navigateTo("/"))
+          .then(() => navigateTo("/app/myHouses"))
           .catch((err) => console.log(err));
       }
     }
@@ -94,7 +93,7 @@ export default function AddHouse({
       className={clsx(
         "overflow-auto w-full lg:w-3/4 flex flex-row justify-center px-[20px] md:p-[50px]",
         {
-          "min-w-[300px] lg:w-full py-[10px] h-fit px-[10px] dark:bg-gray-800 dark:text-gray-400 md:p-0 overflow-y-auto":
+          "min-w-[300px] lg:w-full py-[10px] h-fit px-[10px]  dark:bg-gray-800 dark:text-gray-400 md:p-0 overflow-y-auto":
             house,
         }
       )}
@@ -144,7 +143,7 @@ export default function AddHouse({
             <Marker draggable={false} position={formData.position}></Marker>
             <LocationFinderDummy />
           </MapContainer>
-          {house ? (
+          {house && handleClose ? (
             <div className=" w-full flex flex-col sm:flex-row justify-start gap-[20px]">
               <Button text="close" onClick={() => handleClose()} />
               <Button text="edit" />

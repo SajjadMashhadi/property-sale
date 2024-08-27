@@ -18,7 +18,7 @@ const customStyles = {
   },
 };
 
-export default function Sidebar() {
+export default function Sidebar({ loggedIn }: { loggedIn: boolean }) {
   //state for toggling side bar menu in mobile screens
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -52,7 +52,7 @@ export default function Sidebar() {
         <div className="flex flex-col gap-[10px] mt-[20px] ">
           <NavLink
             onClick={() => setShowSidebar(false)}
-            to="/"
+            to={loggedIn ? "/app/houses" : "/houses"}
             className={({ isActive }) =>
               [
                 "h-[50px] rounded-[5px] flex pl-[10px] items-center ",
@@ -64,32 +64,61 @@ export default function Sidebar() {
           >
             houses
           </NavLink>
-
-          <NavLink
-            to="/addHouse"
-            onClick={() => setShowSidebar(false)}
-            className={({ isActive }) =>
-              [
-                "h-[50px] rounded-[5px] flex pl-[10px] items-center ",
-                isActive
-                  ? "dark:bg-gray-800 bg-gray-700 dark:text-white text-white"
-                  : "dark:hover:bg-gray-600 hover:bg-gray-200",
-              ].join(" ")
-            }
-          >
-            add house
-          </NavLink>
+          {loggedIn && (
+            <NavLink
+              onClick={() => setShowSidebar(false)}
+              to="/app/myHouses"
+              className={({ isActive }) =>
+                [
+                  "h-[50px] rounded-[5px] flex pl-[10px] items-center ",
+                  isActive
+                    ? "dark:bg-gray-800 bg-gray-700 dark:text-white text-white"
+                    : "dark:hover:bg-gray-600 hover:bg-gray-200",
+                ].join(" ")
+              }
+            >
+              my houses
+            </NavLink>
+          )}
+          {loggedIn && (
+            <NavLink
+              to="/app/addHouse"
+              onClick={() => setShowSidebar(false)}
+              className={({ isActive }) =>
+                [
+                  "h-[50px] rounded-[5px] flex pl-[10px] items-center ",
+                  isActive
+                    ? "dark:bg-gray-800 bg-gray-700 dark:text-white text-white"
+                    : "dark:hover:bg-gray-600 hover:bg-gray-200",
+                ].join(" ")
+              }
+            >
+              add house
+            </NavLink>
+          )}
         </div>
         <hr className="border-gray-300 dark:border-gray-500 my-[20px]" />
-        <div className="flex flex-col gap-[20px] items-center mt-[20px]">
-          <Button
-            text="log out"
-            onClick={() => {
-              setShowModal(true);
-              setShowSidebar(false);
-            }}
-          />
-        </div>
+        {loggedIn && (
+          <div className="flex flex-col gap-[20px] items-center mt-[20px]">
+            <Button
+              text="logout"
+              onClick={() => {
+                setShowModal(true);
+                setShowSidebar(false);
+              }}
+            />
+          </div>
+        )}
+        {!loggedIn && (
+          <div className="flex flex-col gap-[20px] items-center mt-[20px]">
+            <Button
+              text="login"
+              onClick={() => {
+                logout();
+              }}
+            />
+          </div>
+        )}
       </div>
       <Modal
         ariaHideApp={false}

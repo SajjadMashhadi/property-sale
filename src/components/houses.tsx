@@ -1,22 +1,21 @@
 import { useState } from "react";
-import { useHouses } from "../api/useFetch";
 
 import HouseCard from "./houseCard";
 import EmptyPage from "./emptyPage";
 import Button from "./button";
-
-interface house {
-  id: number;
-  address: string;
-  description: string;
-}
+import { useHouses } from "../api/useFetch";
 
 const limit = 6;
 
-export default function Houses() {
+export default function Houses({ userHouses }: { userHouses: boolean }) {
   const [page, setPage] = useState<number>(1);
 
-  const { data: houses, dataLength, isPending, error } = useHouses(page, limit);
+  const {
+    data: houses,
+    dataLength,
+    isPending,
+    error,
+  } = useHouses(page, limit, userHouses);
 
   const totalPages = dataLength ? Math.ceil(dataLength / limit) : 1;
 
@@ -50,7 +49,7 @@ export default function Houses() {
           Houses
         </h1>
         <div className=" w-full md:w-[600px] lg:w-[650px] xl:w-[850px] 2xl:w-[1000px] flex flex-row flex-wrap gap-[20px] px-[30px] pt-[50px]  ">
-          {houses.map((house: house) => (
+          {houses.map((house) => (
             <HouseCard key={house.id} address={house.address} id={house.id} />
           ))}
         </div>

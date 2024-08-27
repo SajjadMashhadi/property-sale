@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useLocalStorage } from "usehooks-ts";
 
 interface UserRegister {
@@ -7,11 +7,27 @@ interface UserRegister {
   password: string;
 }
 
-interface UseFetchResult {
-  data: any | null;
+interface UseFetchHouseResult {
+  data: House | null;
   dataLength?: number | null;
   isPending: boolean;
-  error: any | null;
+  error: AxiosError | null;
+}
+
+interface UseFetchHousesResult {
+  data: House[] | null;
+  dataLength?: number | null;
+  isPending: boolean;
+  error: AxiosError | null;
+}
+
+interface House {
+  address: string;
+  description: string;
+  phone: string;
+  position: { lat: number; lng: number };
+  id: number;
+  userId: number;
 }
 
 const api = axios.create({
@@ -34,48 +50,72 @@ api.interceptors.request.use(
 );
 
 //fetch houses
-export const useHouses = (page: number, limit: number): UseFetchResult => {
-  const [data, setData] = useState<any | null>(null);
+export const useHouses = (
+  page: number,
+  limit: number,
+  userHouses: boolean
+): UseFetchHousesResult => {
+  const [data, setData] = useState<House[] | null>(null);
   const [dataLength, setDataLength] = useState<number | null>(null);
   const [isPending, setIsPending] = useState<boolean>(true);
-  const [error, setError] = useState<any | null>(null);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   const [userId] = useLocalStorage("userId", null);
 
   useEffect(() => {
-    api
-      // .get("/600/houses", {
-      .get(`/640/houses`, {
-        params: {
-          _page: page,
-          _limit: limit,
-          userId,
-        },
-      })
-      .then((res) => {
-        setData(res.data);
-        setError(null);
-        setIsPending(false);
-        setDataLength(res.headers["x-total-count"]);
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.status === 401) {
-          logout();
-        }
-        setError(err);
-      })
-      .finally(() => setIsPending(false));
-  }, [page, limit, userId]);
+    if (userHouses) {
+      api
+        .get(`/640/houses`, {
+          params: {
+            _page: page,
+            _limit: limit,
+            userId,
+          },
+        })
+        .then((res) => {
+          setData(res.data);
+          setError(null);
+          setIsPending(false);
+          setDataLength(res.headers["x-total-count"]);
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.status === 401) {
+            logout();
+          }
+          setError(err);
+        })
+        .finally(() => setIsPending(false));
+    } else {
+      api
+
+        .get(`/houses`, {
+          params: {
+            _page: page,
+            _limit: limit,
+          },
+        })
+        .then((res) => {
+          setData(res.data);
+          setError(null);
+          setIsPending(false);
+          setDataLength(res.headers["x-total-count"]);
+        })
+        .catch((err) => {
+          setError(err);
+        })
+        .finally(() => setIsPending(false));
+    }
+  }, [page, limit, userId, userHouses]);
 
   return { data, dataLength, isPending, error };
 };
 
 //fetch a house by id
-export const useHouse = (id: string): UseFetchResult => {
-  const [data, setData] = useState<any | null>(null);
+export const useHouse = (id: string): UseFetchHouseResult => {
+  const [data, setData] = useState<House | null>(null);
   const [isPending, setIsPending] = useState<boolean>(true);
-  const [error, setError] = useState<any | null>(null);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
     api
@@ -96,7 +136,10 @@ export const useHouse = (id: string): UseFetchResult => {
 };
 
 //get the address from location (lat,lng)
-export const getAddress = (lat: number, lng: number) => {
+export const getAddress = (
+  lat: number,
+  lng: number
+): Promise<AxiosResponse> => {
   return new Promise((resolve, reject) => {
     axios
       .get(
@@ -110,7 +153,7 @@ export const getAddress = (lat: number, lng: number) => {
 };
 
 //add house
-export const addHouse = (body) => {
+export const addHouse = (body: House) => {
   return new Promise((resolve, reject) => {
     api
       .post("/600/houses", body)
@@ -123,8 +166,8 @@ export const addHouse = (body) => {
   });
 };
 
-//add house
-export const editHouse = (id, body) => {
+//edit house
+export const editHouse = (id: string, body: House) => {
   return new Promise((resolve, reject) => {
     api
       .put(`/600/houses/${id}`, body)

@@ -1,6 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import App from "./App.tsx";
 import "./index.css";
 import Houses from "./components/houses.tsx";
@@ -9,27 +13,54 @@ import Signup from "./components/signup.tsx";
 import AddHouse from "./components/addHouse.tsx";
 import ProtectedRoute from "./components/protectedRoute.tsx";
 import ThemeSwitch from "./components/themeSwitch.tsx";
+import AuthProvider from "./auth/provider.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ProtectedRoute />,
+    element: <App loggedIn={false} />,
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <Navigate to="/houses" />,
+      },
+      {
+        path: "/houses",
+        element: <Houses userHouses={false} />,
+      },
 
+      {
+        path: "/houses/:id",
+        element: <House />,
+      },
+    ],
+  },
+  {
+    path: "/app",
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/app",
+        element: <App loggedIn={true} />,
         children: [
           {
-            path: "/",
-            element: <Houses />,
+            path: "/app/",
+            element: <Navigate to="/app/houses" />,
           },
           {
-            path: "/addHouse",
+            path: "/app/houses",
+            element: <Houses userHouses={false} />,
+          },
+          {
+            path: "/app/myHouses",
+            element: <Houses userHouses={true} />,
+          },
+          {
+            path: "/app/addHouse",
             element: <AddHouse />,
           },
           {
-            path: "/houses/:id",
+            path: "/app/houses/:id",
             element: <House />,
           },
         ],
@@ -48,7 +79,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeSwitch />
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <ThemeSwitch />
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );

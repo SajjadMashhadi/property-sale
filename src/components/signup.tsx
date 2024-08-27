@@ -29,7 +29,7 @@ export default function Signup({ registerType }: { registerType: string }) {
         .then((res) => {
           setToken(res.data.accessToken);
           setUserId(res.data.user.id);
-          navigateTo("/");
+          navigateTo("/app");
         })
         .catch((err) => {
           setErrorMessage(err.response.data);
@@ -40,7 +40,7 @@ export default function Signup({ registerType }: { registerType: string }) {
         .then((res) => {
           setToken(res.data.accessToken);
           setUserId(res.data.user.id);
-          navigateTo("/addHouse");
+          navigateTo("/app/Houses");
           console.log(res);
         })
         .catch((err) => {

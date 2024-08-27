@@ -39,12 +39,12 @@
   "houses": [
     {
       "userId": 1,
-      "address": "Perspective Building, 100, Westminster Bridge Road, Waterloo, London Borough of Lambeth, London, Greater London, England, SE1 7JQ, United Kingdom",
+      "address": "Cumberland Street, Pimlico, London, Greater London, England, SW1V 4RN, United Kingdom",
       "description": "zczvcv",
       "phone": "43243214",
       "position": {
-        "lat": 51.498377681772325,
-        "lng": -0.11072158813476564
+        "lat": 51.488074681670675,
+        "lng": -0.14344024762976917
       },
       "id": 1
     },
@@ -112,6 +112,39 @@
       },
       "userId": 7,
       "id": 7
+    },
+    {
+      "address": "14, Melior Street, Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 3QQ, United Kingdom",
+      "description": "fdsafsdaf",
+      "phone": "134124",
+      "position": {
+        "lat": 51.50297266764028,
+        "lng": -0.08497238159179688
+      },
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "address": "Sarsons Vinegar Factory, Roper Lane, Bermondsey Village, Old Kent Road, London Borough of Southwark, London, Greater London, England, SE1 2EH, United Kingdom",
+      "description": "safsdafs",
+      "phone": "1412423",
+      "position": {
+        "lat": 51.50062180251775,
+        "lng": -0.07930755615234376
+      },
+      "userId": 1,
+      "id": 9
+    },
+    {
+      "address": "Great Dover Street Apartments, 165, Great Dover Street, Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 4XA, United Kingdom",
+      "description": "fdsaf",
+      "phone": "412124",
+      "position": {
+        "lat": 51.49816395022406,
+        "lng": -0.08995056152343751
+      },
+      "userId": 1,
+      "id": 10
     }
   ]
 }
