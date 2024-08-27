@@ -12,7 +12,7 @@ import House from "./components/house.tsx";
 import Signup from "./components/signup.tsx";
 import AddHouse from "./components/addHouse.tsx";
 import ProtectedRoute from "./components/protectedRoute.tsx";
-import ThemeSwitch from "./components/themeSwitch.tsx";
+import ThemeSwitch from "./ui/themeSwitch.tsx";
 import AuthProvider from "./auth/provider.tsx";
 import Interceptor from "./api/interceptor.tsx";
 

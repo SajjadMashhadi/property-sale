@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Button from "./button";
+import Button from "../ui/button";
 import { login, signup } from "../api/useFetch";
 import { useNavigate, Link } from "react-router-dom";
-import Input from "./input";
+import Input from "../ui/input";
 import { useAuth } from "../auth/auth";
 
 interface user {
@@ -26,7 +26,6 @@ export default function Signup({ registerType }: { registerType: string }) {
     if (registerType === "login") {
       login(formData)
         .then((res) => {
-          console.log(res);
           register(res.data.accessToken, res.data.user.id);
           navigateTo("/app");
         })

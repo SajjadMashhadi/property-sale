@@ -49,6 +49,11 @@
       "email": "dsfasfs@bvxbvc.hjkhjk",
       "password": "$2a$10$lvWbZTvrlo8WbJPmE7WOeOvG0ZJfJSw4aSSWzlCGFZLiZxIT3pOVe",
       "id": 10
+    },
+    {
+      "email": "trtwrewe@gfdg.hkhjkh",
+      "password": "$2a$10$MgG.onMxMQicHov9m9PfPOtGSAMKaa8H6vPd9agMlhRAv9hr1kxEm",
+      "id": 11
     }
   ],
   "houses": [
@@ -118,12 +123,12 @@
       "id": 7
     },
     {
-      "address": "Great Dover Street Apartments, 165, Great Dover Street, Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 4XA, United Kingdom",
+      "address": "South Carriage Drive, Belgravia, London, Greater London, England, SW1X 7NL, United Kingdom",
       "description": "fdsaf",
       "phone": "412124",
       "position": {
-        "lat": 51.49816395022406,
-        "lng": -0.08995056152343751
+        "lat": 51.503250489794105,
+        "lng": -0.15466690063476565
       },
       "userId": 1,
       "id": 10
@@ -138,28 +143,6 @@
       },
       "userId": 1,
       "id": 11
-    },
-    {
-      "address": "Petite Route du Ryveld, Steenvoorde, Dunkirk, Norte, Hauts-de-France, Metropolitan France, 59114, France",
-      "description": "fdsaf",
-      "phone": "4324",
-      "position": {
-        "lat": 50.81495951537223,
-        "lng": 2.5433349609375004
-      },
-      "userId": 1,
-      "id": 13
-    },
-    {
-      "address": "Greene House, Burge Street, Bermondsey Village, Walworth, London Borough of Southwark, London, Greater London, England, SE1 4ER, United Kingdom",
-      "description": "vxvx",
-      "phone": "5435",
-      "position": {
-        "lat": 51.49630444411563,
-        "lng": -0.08926391601562501
-      },
-      "userId": 1,
-      "id": 14
     },
     {
       "address": "London South Bank University, Milcote Street, Elephant and Castle, London Borough of Southwark, London, Greater London, England, SE1 0AA, United Kingdom",
@@ -193,6 +176,39 @@
       },
       "userId": 1,
       "id": 17
+    },
+    {
+      "address": "St Botolph Building, 138, Houndsditch, Aldgate, City of London, Greater London, England, EC3A 7DH, United Kingdom",
+      "description": "fsafsadf",
+      "phone": "341234",
+      "position": {
+        "lat": 51.51440469156115,
+        "lng": -0.07707595825195314
+      },
+      "userId": 1,
+      "id": 18
+    },
+    {
+      "address": "Gloucester Court, Swan Street, The Borough, London Borough of Southwark, London, Greater London, England, SE1 1DQ, United Kingdom",
+      "description": "sfasf",
+      "phone": "341324",
+      "position": {
+        "lat": 51.49891200625809,
+        "lng": -0.09458541870117189
+      },
+      "id": 1,
+      "userId": 1
+    },
+    {
+      "address": "NEO Bankside - Pavillion C, 70, Holland Street, Bankside, The Borough, London Borough of Southwark, London, Greater London, England, SE1 9JF, United Kingdom",
+      "description": "fsaf",
+      "phone": "3214",
+      "position": {
+        "lat": 51.50688338430535,
+        "lng": -0.10061119384630947
+      },
+      "userId": 11,
+      "id": 19
     }
   ]
 }

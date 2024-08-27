@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { deleteHouse, useHouse } from "../api/useFetch";
-import DetailFiels from "./detailField";
-import EmptyPage from "./emptyPage";
+import DetailFiels from "../ui/detailField";
+import EmptyPage from "../ui/emptyPage";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
-import Button from "./button";
+import Button from "../ui/button";
 import Modal from "react-modal";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";

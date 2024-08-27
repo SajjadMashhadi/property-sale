@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import Button from "./button";
+import Button from "../ui/button";
 import Modal from "react-modal";
 import { useState } from "react";
 import clsx from "clsx";

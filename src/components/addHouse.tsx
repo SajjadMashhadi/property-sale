@@ -1,32 +1,24 @@
 import { useState } from "react";
-import Button from "./button";
-import Input from "./input";
+import Button from "../ui/button";
+import Input from "../ui/input";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "usehooks-ts";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { addHouse, editHouse, getAddress } from "../api/useFetch";
-
-interface house {
-  address: string;
-  description: string;
-  phone: string;
-  position: { lat: number; lng: number };
-  id?: number;
-  userId?: number;
-}
+import { House, HouseForm } from "../utils/types";
 
 //a component for both add and edit house
 export default function AddHouse({
   house,
   handleClose,
 }: {
-  house?: house;
+  house?: House;
   handleClose?: () => void;
 }) {
-  const [userId] = useLocalStorage("userId", null);
+  const [userId] = useLocalStorage("userId", undefined);
 
-  const [formData, setFormData] = useState<house>(
+  const [formData, setFormData] = useState<HouseForm>(
     house
       ? house
       : {
@@ -73,7 +65,7 @@ export default function AddHouse({
       setErrorMessage("Please fill all the inputs");
     } else {
       if (house) {
-        editHouse(house.id, formData)
+        editHouse(house.id, { ...formData, userId })
           .then(() => navigateTo("/app/myHouses"))
           .catch((err) => console.log(err));
       } else {

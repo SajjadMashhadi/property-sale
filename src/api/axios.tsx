@@ -1,4 +1,11 @@
 import axios from "axios";
+import { House, UserRegister } from "../utils/types";
+
+interface Params {
+  _page?: number;
+  _limit?: number;
+  userId?: number;
+}
 
 export const api = axios.create({
   baseURL: "http://localhost:3000",
@@ -20,7 +27,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export function get(url: string, params?: any) {
+export function get(url: string, params?: Params) {
   return new Promise((resolve, reject) => {
     api
       .get(url, { params })
@@ -33,7 +40,7 @@ export function get(url: string, params?: any) {
   });
 }
 
-export function post(url: string, body) {
+export function post(url: string, body: UserRegister | House) {
   return new Promise((resolve, reject) => {
     api
       .post(url, body)
@@ -59,7 +66,7 @@ export function deleteMethod(url: string) {
   });
 }
 
-export function put(url: string, body) {
+export function put(url: string, body: House) {
   return new Promise((resolve, reject) => {
     api
       .put(url, body)

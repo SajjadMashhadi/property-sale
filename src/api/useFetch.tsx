@@ -2,35 +2,12 @@ import { useState, useEffect } from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useLocalStorage } from "usehooks-ts";
 import { deleteMethod, get, post, put } from "./axios";
-import { useAuth } from "../auth/auth";
-
-interface UserRegister {
-  email: string;
-  password: string;
-}
-
-interface UseFetchHouseResult {
-  data: House | null;
-  dataLength?: number | null;
-  isPending: boolean;
-  error: AxiosError | null;
-}
-
-interface UseFetchHousesResult {
-  data: House[] | null;
-  dataLength?: number | null;
-  isPending: boolean;
-  error: AxiosError | null;
-}
-
-interface House {
-  address: string;
-  description: string;
-  phone: string;
-  position: { lat: number; lng: number };
-  id: number;
-  userId: number;
-}
+import {
+  UserRegister,
+  House,
+  UseFetchHouseResult,
+  UseFetchHousesResult,
+} from "../utils/types";
 
 //fetch houses
 export const useHouses = (
@@ -133,7 +110,7 @@ export const addHouse = (body: House) => {
 };
 
 //edit house
-export const editHouse = (id: string, body: House) => {
+export const editHouse = (id: number, body: House) => {
   return put(`/600/houses/${id}`, body);
 };
 
@@ -144,7 +121,6 @@ export const deleteHouse = (id: string) => {
 
 //logout
 export const logout = () => {
-  console.log("logging out");
   localStorage.removeItem("token");
   localStorage.removeItem("userId");
 };

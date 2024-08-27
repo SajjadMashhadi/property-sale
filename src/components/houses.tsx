@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HouseCard from "./houseCard";
-import EmptyPage from "./emptyPage";
-import Button from "./button";
+import EmptyPage from "../ui/emptyPage";
+import Button from "../ui/button";
 import { useHouses } from "../api/useFetch";
 import { useLocation } from "react-router-dom";
 
